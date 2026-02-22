@@ -8,7 +8,6 @@
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; }
         body { font-family: sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
         
-        /* Logo & Branding */
         .header-brand { padding: 30px 10px 10px 10px; }
         .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); border: 2px solid var(--gold); }
         
@@ -30,15 +29,15 @@
 
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        .stat-row { display: flex; gap: 10px; margin-bottom: 5px; }
+        .stat-row input { flex: 1; font-size: 12px; }
+        
         button.main-submit { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         
         .rules-list { line-height: 1.6; list-style: none; padding: 0; }
         .rules-list li { margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
         .rules-list li strong { color: var(--gold); }
-        
-        .points-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
-        .points-table th, .points-table td { border: 1px solid #45a29e; padding: 8px; text-align: center; }
-        .points-table th { background: rgba(69, 162, 158, 0.2); }
+        .example-box { background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid var(--gold); margin: 10px 0; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -73,31 +72,18 @@
             <h2>📜 League Rules</h2>
             <ul class="rules-list">
                 <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong>.</li>
-                <li><strong>Video Requirement:</strong> A camera is <strong>strictly required</strong> and must remain on for the duration of the match.</li>
-                <li><strong>Verification:</strong> Both players are responsible for taking a screenshot of the final score.</li>
-                <li><strong>Submissions:</strong> Ensure your score and screenshot is uploaded via the "Submit Score" page immediately after the game.</li>
-                <li><strong>Fixtures:</strong> 3 fixtures are generated every Monday at 12pm. All weekly games must be played before the next reset. (It is not always possible to play all your games in one week for personal or work commitments, if you cannot play all your weekly games please advise an admin, fixtures will be held for a maximum of 2 weeks after the initial publication, if there is no result after this time, the available player will be awarded 7 points).</li>
+                <li><strong>Scoring System:</strong> A win is awarded <strong>3 Points</strong>. Additionally, <strong>every leg won is an additional 1 point awarded</strong>, regardless of the match result.</li>
                 
-                <li><strong>Points System:</strong>
-                    <table class="points-table">
-                        <tr><th>Outcome</th><th>Points Awarded</th></tr>
-                        <tr><td>Win</td><td>3 Points</td></tr>
-                        <tr><td>Draw (N/A)</td><td>1 Point</td></tr>
-                    </table>
-                </li>
+                <div class="example-box">
+                    <strong>Example:</strong> Player A beats Player B with a score of <strong>4-2</strong>.<br>
+                    • <strong>Player A:</strong> 3 (Win) + 4 (Legs) = <strong>7 Points</strong><br>
+                    • <strong>Player B:</strong> 0 (Loss) + 2 (Legs) = <strong>2 Points</strong>
+                </div>
 
-                <li><strong>Division Averages:</strong>
-                    <p style="font-size: 13px; margin: 10px 0;">Initial placement is based on your current match average:</p>
-                    <ul style="font-size: 13px;">
-                        <li><strong>Premiership:</strong> 60+ Average</li>
-                        <li><strong>Championship:</strong> 50 - 59.9 Average</li>
-                        <li><strong>League 1:</strong> 40 - 49.9 Average</li>
-                        <li><strong>League 2:</strong> Under 40 Average</li>
-                    </ul>
-                    <p style="background: rgba(255, 204, 0, 0.1); padding: 8px; border-radius: 5px; font-size: 12px; color: var(--gold); border: 1px solid var(--gold);">
-                        *Note: These averages are used for <strong>initial league placement only</strong> and will not prevent you from being promoted or relegated at the end of each season based on your performance.
-                    </p>
-                </li>
+                <li><strong>Video Requirement:</strong> A camera is strictly required and must remain on for the duration of the match.</li>
+                <li><strong>Verification:</strong> Both players must take a screenshot of the final score/stats.</li>
+                <li><strong>Fixtures:</strong> Generated Mondays at 12pm. 2-week maximum grace period for unplayed games (Admin must be notified).</li>
+                <li><strong>Averages:</strong> Used for initial placement only. Does not impact end-of-season merit promotion/relegation.</li>
             </ul>
         </div>
     </div>
@@ -117,7 +103,14 @@
             <input type="password" id="pin" placeholder="Your 4-Digit PIN">
             <button type="button" onclick="fetchOpponents()" style="background:#45a29e; color:white; border:none; padding:10px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold; cursor:pointer;">FIND MY FIXTURES</button>
             <select id="p2"><option value="">-- Select Opponent --</option></select>
+            
             <div style="display:flex; gap:10px;"><input type="number" id="s1" placeholder="Your Legs"><input type="number" id="s2" placeholder="Opponent Legs"></div>
+            
+            <div class="stat-row">
+                <input type="number" id="h_co" placeholder="Highest Checkout (Optional)">
+                <input type="number" id="180s" placeholder="Total 180s (Optional)">
+            </div>
+
             <input type="file" id="screenshot" accept="image/*">
             <button class="main-submit" onclick="handleSend('MATCH')">SUBMIT RESULT</button>
         </div>
@@ -128,7 +121,12 @@
             <h2>📝 Join Club</h2>
             <input type="text" id="j_name" placeholder="Full Name">
             <input type="password" id="j_pin" placeholder="Choose 4-Digit PIN">
-            <select id="j_league"><option value="PL">Premiership</option><option value="CH">Championship</option><option value="L1">League 1</option><option value="L2">League 2</option></select>
+            <select id="j_league">
+                <option value="PL">Premiership (60+ Avg)</option>
+                <option value="CH">Championship (50-59.9 Avg)</option>
+                <option value="L1">League 1 (40-49.9 Avg)</option>
+                <option value="L2">League 2 (Under 40 Avg)</option>
+            </select>
             <input type="file" id="j_photo" accept="image/*">
             <button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
         </div>
@@ -136,8 +134,7 @@
 </div>
 
 <script>
-    // PASTE YOUR GOOGLE WEB APP URL HERE
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
+    const scriptURL = 'PASTE_YOUR_COPIED_URL_HERE';
 
     function show(id) {
         document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active'));
@@ -183,13 +180,15 @@
                 score1: isMatch ? document.getElementById('s1').value : null,
                 score2: isMatch ? document.getElementById('s2').value : null,
                 player2: isMatch ? document.getElementById('p2').value : null,
+                hco: isMatch ? document.getElementById('h_co').value : null,
+                t180: isMatch ? document.getElementById('180s').value : null,
                 league: isMatch ? null : document.getElementById('j_league').value,
                 imageBlob: reader.result.split(',')[1],
                 imageType: fileInput.files[0].type
             };
             try {
                 await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-                alert("Success!");
+                alert("Success! Submitted to Admin.");
                 location.reload();
             } catch (e) { alert("Error sending."); }
         };
