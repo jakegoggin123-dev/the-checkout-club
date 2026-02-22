@@ -7,33 +7,27 @@
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; }
         body { font-family: sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
-        
         .header-brand { padding: 30px 10px 10px 10px; }
         .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); border: 2px solid var(--gold); }
-        
         nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 6px 10px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); color: white; }
-        
         .container { max-width: 900px; margin: auto; padding: 20px; }
         .league-section { display: none; }
         .active { display: block !important; }
         .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; }
-        
         .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
         .view-btn { background: #45a29e; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
         .view-btn:hover { background: #66fcf1; color: var(--dark); }
         .sub-view { display: none; }
         .sub-active { display: block !important; }
-
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; }
         .stat-row { display: flex; gap: 10px; margin-bottom: 5px; }
         .stat-row input { flex: 1; font-size: 12px; }
-        
+        .stat-label { font-size: 11px; color: var(--gold); margin-bottom: 2px; display: block; }
         button.main-submit { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        
         .rules-list { line-height: 1.6; list-style: none; padding: 0; }
         .rules-list li { margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
         .rules-list li strong { color: var(--gold); }
@@ -59,40 +53,24 @@
 </div>
 
 <div class="container">
-
-    <div id="NEWS" class="league-section active">
-        <div class="card">
-            <h2>📢 Announcements</h2>
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false"></iframe>
-        </div>
-    </div>
+    <div id="NEWS" class="league-section active"><div class="card"><h2>📢 Announcements</h2><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false"></iframe></div></div>
 
     <div id="RULES" class="league-section">
         <div class="card">
             <h2>📜 League Rules</h2>
             <ul class="rules-list">
-                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong>.</li>
-                <li><strong>Scoring System:</strong> A win is awarded <strong>3 Points</strong>. Additionally, <strong>every leg won is an additional 1 point awarded</strong>, regardless of the match result.</li>
-                
-                <div class="example-box">
-                    <strong>Example:</strong> Player A beats Player B with a score of <strong>4-2</strong>.<br>
-                    • <strong>Player A:</strong> 3 (Win) + 4 (Legs) = <strong>7 Points</strong><br>
-                    • <strong>Player B:</strong> 0 (Loss) + 2 (Legs) = <strong>2 Points</strong>
-                </div>
-
-                <li><strong>Video Requirement:</strong> A camera is strictly required and must remain on for the duration of the match.</li>
-                <li><strong>Verification:</strong> Both players must take a screenshot of the final score/stats.</li>
-                <li><strong>Fixtures:</strong> Generated Mondays at 12pm. 2-week maximum grace period for unplayed games (Admin must be notified).</li>
+                <li><strong>Format:</strong> Best of 7 legs.</li>
+                <li><strong>Points:</strong> 3 for a Win + 1 Point per leg won.</li>
+                <div class="example-box"><strong>Example:</strong> 4-2 win = 7 pts for winner, 2 pts for loser.</div>
+                <li><strong>Video:</strong> Camera must be on.</li>
+                <li><strong>Verification:</strong> Screenshot required for all submissions.</li>
             </ul>
         </div>
     </div>
 
     <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    
     <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    
     <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div><div id="L1-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    
     <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div><div id="L2-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe></div></div></div>
 
     <div id="SUBMIT" class="league-section">
@@ -105,10 +83,11 @@
             
             <div style="display:flex; gap:10px;"><input type="number" id="s1" placeholder="Your Legs"><input type="number" id="s2" placeholder="Opponent Legs"></div>
             
-            <div class="stat-row">
-                <input type="number" id="h_co" placeholder="Highest Checkout (Optional)">
-                <input type="number" id="180s" placeholder="Total 180s (Optional)">
-            </div>
+            <span class="stat-label">180s Thrown</span>
+            <div class="stat-row"><input type="number" id="p1_180s" placeholder="Your 180s"><input type="number" id="p2_180s" placeholder="Opponent 180s"></div>
+            
+            <span class="stat-label">Highest Checkout</span>
+            <div class="stat-row"><input type="number" id="p1_hco" placeholder="Your High CO"><input type="number" id="p2_hco" placeholder="Opponent High CO"></div>
 
             <input type="file" id="screenshot" accept="image/*">
             <button class="main-submit" onclick="handleSend('MATCH')">SUBMIT RESULT</button>
@@ -133,7 +112,6 @@
 </div>
 
 <script>
-    // YOUR CURRENT SCRIPT URL
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
 
     function show(id) {
@@ -141,13 +119,11 @@
         document.getElementById(id).classList.add('active');
         window.scrollTo(0, 0);
     }
-
     function toggleView(leagueId, viewType) {
         document.getElementById(leagueId + '-table').classList.remove('sub-active');
         document.getElementById(leagueId + '-fixtures').classList.remove('sub-active');
         document.getElementById(leagueId + '-' + viewType).classList.add('sub-active');
     }
-
     async function fetchOpponents() {
         const p1 = document.getElementById('p1').value;
         const pin = document.getElementById('pin').value;
@@ -165,12 +141,10 @@
             });
         } catch (e) { alert("Error connecting to database."); }
     }
-
     async function handleSend(mode) {
         const isMatch = mode === 'MATCH';
         const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
         if(!fileInput.files[0]) { alert("Please upload a screenshot."); return; }
-        
         const reader = new FileReader();
         reader.onload = async function() {
             const data = {
@@ -180,8 +154,10 @@
                 score1: isMatch ? document.getElementById('s1').value : null,
                 score2: isMatch ? document.getElementById('s2').value : null,
                 player2: isMatch ? document.getElementById('p2').value : null,
-                hco: isMatch ? document.getElementById('h_co').value : null,
-                t180: isMatch ? document.getElementById('180s').value : null,
+                p1_180s: isMatch ? document.getElementById('p1_180s').value : null,
+                p2_180s: isMatch ? document.getElementById('p2_180s').value : null,
+                p1_hco: isMatch ? document.getElementById('p1_hco').value : null,
+                p2_hco: isMatch ? document.getElementById('p2_hco').value : null,
                 league: isMatch ? null : document.getElementById('j_league').value,
                 imageBlob: reader.result.split(',')[1],
                 imageType: fileInput.files[0].type
