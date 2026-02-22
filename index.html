@@ -2,84 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Checkout Club</title>
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
         
-        /* Stop the browser from allowing any side-to-side movement */
-        html, body { 
-            overflow-x: hidden !important; 
-            width: 100%;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            background: var(--dark);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-        }
-
-        /* Layout */
-        .header-brand { padding: 25px 10px 10px 10px; }
-        .logo { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 15px rgba(230, 57, 70, 0.4); }
+        /* Header & Logo */
+        .header-brand { padding: 30px 10px 10px 10px; }
+        .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); border: 2px solid var(--gold); }
         
-        /* Navigation - Restored Full Names */
-        nav { background: var(--card); padding: 12px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; z-index: 1000; }
-        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 7px 9px; font-size: 10px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { background: var(--red); }
+        /* Responsive Nav */
+        nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
+        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { background: var(--red); color: white; }
         
-        .container { width: 100%; max-width: 900px; margin: auto; padding: 15px; box-sizing: border-box; }
-        .league-section { display: none; width: 100%; }
+        /* Container & Layout */
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .league-section { display: none; }
         .active { display: block !important; }
+        .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; line-height: 1.6; }
+        .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; }
         
-        .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; }
-        .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; font-size: 1.4em; }
+        /* News Mobile Fix */
+        .news-frame { width: 100%; height: 500px; border: none; background: white; border-radius: 10px; }
         
-        /* THE NEWS FIX: Forced Scaling */
-        .news-container { 
-            width: 100%; 
-            height: 500px;
-            overflow: hidden; 
-            border-radius: 10px; 
-            background: white;
-            position: relative;
-        }
-        .news-frame { 
-            width: 200%; /* Render at double size */
-            height: 200%; 
-            border: none;
-            transform: scale(0.5); /* Shrink back to 50% to fit mobile */
-            transform-origin: 0 0;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        /* Rules - Restored 🎯 Formatting */
-        .rules-list { list-style: none; padding: 0; color: var(--text); font-size: 14px; line-height: 1.6; }
-        .rules-list li { margin-bottom: 12px; padding-left: 28px; position: relative; }
+        /* Rules List Style */
+        .rules-list { list-style: none; padding: 0; color: var(--text); }
+        .rules-list li { margin-bottom: 15px; padding-left: 25px; position: relative; }
         .rules-list li::before { content: '🎯'; position: absolute; left: 0; }
         .rules-list strong { color: var(--gold); }
-        .rules-sub-list { list-style: circle; margin-top: 8px; padding-left: 20px; color: #aeb0b1; }
+        .rules-sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; }
 
-        /* Tables & Fixtures */
-        iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
+        /* Controls & Inputs */
         .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .view-btn { background: #45a29e; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: bold; }
+        .view-btn { background: #45a29e; color: white; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .view-btn:hover { background: #66fcf1; color: var(--dark); }
         .sub-view { display: none; }
         .sub-active { display: block !important; }
-
-        /* Score Entry Form - Restored Multi-Photo & Warning */
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #45a29e; background: #0b0c10; color: white; box-sizing: border-box; font-size: 16px; }
-        .stat-label { font-size: 11px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; text-transform: uppercase; }
-        .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 10px; border-radius: 5px; font-size: 12px; margin: 10px 0; text-align: center; }
-        button.main-submit { background: var(--red); color: white; border: none; padding: 18px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
-
-        @media (max-width: 600px) {
-            .logo { width: 110px; height: 110px; }
-            nav a { padding: 5px 6px; font-size: 8px; }
-        }
+        iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
+        
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #45a29e; background: #0b0c10; color: white; box-sizing: border-box; }
+        .stat-row { display: flex; gap: 10px; margin-bottom: 5px; }
+        .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
+        .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 12px; border-radius: 5px; font-size: 13px; margin: 15px 0; font-weight: bold; }
+        button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        button.main-submit:hover { background: #ff4d5a; }
     </style>
 </head>
 <body>
@@ -97,7 +65,7 @@
 
 <div class="header-brand">
     <img src="1771773124234.png" alt="Logo" class="logo">
-    <h1 style="color:var(--gold); margin-top: 10px; letter-spacing: 2px;">THE CHECKOUT CLUB</h1>
+    <h1 style="color:var(--gold); margin-top: 15px; letter-spacing: 2px;">THE CHECKOUT CLUB</h1>
 </div>
 
 <div class="container">
@@ -105,9 +73,7 @@
     <div id="NEWS" class="league-section active">
         <div class="card">
             <h2>📢 Announcements</h2>
-            <div class="news-container">
-                <iframe class="news-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pub?gid=1947364654&single=true&range=A1:A40&widget=false&chrome=false"></iframe>
-            </div>
+            <iframe class="news-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false&rm=minimal"></iframe>
         </div>
     </div>
 
@@ -115,17 +81,22 @@
         <div class="card">
             <h2>📜 League Rules & Format</h2>
             <ul class="rules-list">
-                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong> (First to 4).</li>
+                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong> (First to 4). If a player reaches 4 legs, the match ends immediately.</li>
                 <li><strong>Points System:</strong> 
                     <ul class="rules-sub-list">
-                        <li><strong>3 Points</strong> for the Match Win.</li>
-                        <li><strong>1 Point</strong> for every leg won.</li>
+                        <li><strong>3 Points</strong> for the overall Match Win.</li>
+                        <li><strong>1 Point</strong> for every single leg won (e.g., a 4-2 win earns the winner 7 points and the loser 2 points).</li>
                     </ul>
                 </li>
-                <li><strong>Season Duration:</strong> 8 weeks. Fixtures have a 14-day play window.</li>
-                <li><strong>Integrity:</strong> Cameras must be clear. Score screenshots are mandatory for submission.</li>
-                <li><strong>Stats:</strong> 180s and High Checkouts (100+) require photo evidence to count for leaderboards.</li>
-                <li><strong>Promotion/Relegation:</strong> Top 2 move up, Bottom 2 move down every 8 weeks.</li>
+                <li><strong>Season Structure:</strong> Seasons last <strong>8 weeks</strong>. Fixtures are generated weekly. You have a 14-day window from the fixture date to complete your game.</li>
+                <li><strong>Technical Requirements:</strong> Cameras must be on and clear at all times during play. Discord or preferred video calling is required.</li>
+                <li><strong>Submission & Evidence:</strong> All results must be submitted via the "Submit Score" page. 
+                    <ul class="rules-sub-list">
+                        <li>A screenshot of the final score is mandatory.</li>
+                        <li><strong>180s and High Checkouts (100+)</strong> must be evidenced via a photo of the board to be recorded on the leaderboards.</li>
+                    </ul>
+                </li>
+                <li><strong>Promotion & Relegation:</strong> At the end of 8 weeks, the top 2 players move up a league, and the bottom 2 players move down.</li>
             </ul>
         </div>
     </div>
@@ -138,25 +109,29 @@
     <div id="SUBMIT" class="league-section">
         <div class="card">
             <h2>🎯 Submit Match Score</h2>
-            <input type="text" id="p1" placeholder="Your Name">
-            <input type="password" id="pin" placeholder="PIN">
-            <button type="button" onclick="fetchOpponents()" style="background:#45a29e; color:white; border:none; padding:10px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold;">LOAD MY FIXTURES</button>
+            <input type="text" id="p1" placeholder="Your Registered Name">
+            <input type="password" id="pin" placeholder="Your 4-Digit PIN">
+            <button type="button" onclick="fetchOpponents()" style="background:#45a29e; color:white; border:none; padding:12px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold; cursor:pointer;">FIND MY FIXTURES</button>
             <select id="p2"><option value="">-- Select Opponent --</option></select>
             
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1" placeholder="0"></div>
-                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2" placeholder="0"></div>
+                <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1"></div>
+                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2"></div>
             </div>
             
-            <span class="stat-label">Special Stats (If any)</span>
-            <div style="display:flex; gap:10px;">
-                <input type="number" id="p1_180s" placeholder="180s" oninput="checkStats()">
-                <input type="number" id="p1_hco" placeholder="High Checkout" oninput="checkStats()">
+            <span class="stat-label">Your Personal Stats (Optional)</span>
+            <div class="stat-row">
+                <input type="number" id="p1_180s" placeholder="How many 180s?" oninput="checkStats()">
+                <input type="number" id="p1_hco" placeholder="Highest Checkout" oninput="checkStats()">
             </div>
-            <div id="statWarning" class="warning-msg">⚠️ Proof required for 180s and High COs.</div>
 
-            <span class="stat-label">Match Photos (Multiple photos allowed)</span>
+            <div id="statWarning" class="warning-msg">
+                ⚠️ PROOF REQUIRED: Please ensure your 180s and High Checkout are visible in your match photo or attach separate photos of the board.
+            </div>
+
+            <span class="stat-label">Attach Proof (Screenshot/Photos - Select Multiple)</span>
             <input type="file" id="screenshot" accept="image/*" multiple>
+            
             <button class="main-submit" onclick="handleSend('MATCH')">SUBMIT OFFICIAL RESULT</button>
         </div>
     </div>
@@ -164,8 +139,9 @@
     <div id="JOIN" class="league-section">
         <div class="card">
             <h2>📝 Join The Club</h2>
+            <p style="color:var(--text); font-size: 14px; text-align: center;">New members start in League 2. Please provide your name and a 4-digit PIN.</p>
             <input type="text" id="j_name" placeholder="Full Name">
-            <input type="password" id="j_pin" placeholder="Set 4-Digit PIN">
+            <input type="password" id="j_pin" placeholder="Choose 4-Digit PIN">
             <button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
         </div>
     </div>
@@ -187,58 +163,64 @@
     }
 
     function checkStats() {
+        const val1 = document.getElementById('p1_180s').value;
+        const val2 = document.getElementById('p1_hco').value;
         const warning = document.getElementById('statWarning');
-        const s180 = document.getElementById('p1_180s').value;
-        const hco = document.getElementById('p1_hco').value;
-        warning.style.display = (s180 > 0 || hco > 0) ? 'block' : 'none';
+        (val1 > 0 || val2 > 0) ? warning.style.display = 'block' : warning.style.display = 'none';
     }
 
     async function fetchOpponents() {
         const p1 = document.getElementById('p1').value;
         const pin = document.getElementById('pin').value;
-        if(!p1 || !pin) return alert("Enter Name and PIN");
+        if(!p1 || !pin) { alert("Enter Name and PIN first"); return; }
         try {
-            const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`);
-            const data = await res.json();
-            const sel = document.getElementById('p2');
-            sel.innerHTML = '<option value="">-- Select Opponent --</option>';
-            data.forEach(o => { let opt = document.createElement('option'); opt.value = opt.innerHTML = o; sel.appendChild(opt); });
-        } catch (e) { alert("Could not find fixtures."); }
+            const response = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`);
+            const opponents = await response.json();
+            const select = document.getElementById('p2');
+            select.innerHTML = '<option value="">-- Select Opponent --</option>';
+            opponents.forEach(opp => {
+                let opt = document.createElement('option');
+                opt.value = opt.innerHTML = opp;
+                select.appendChild(opt);
+            });
+        } catch (e) { alert("Error connecting to database."); }
     }
 
     async function handleSend(mode) {
-        const isM = mode === 'MATCH';
-        const fileInput = document.getElementById('screenshot');
+        const isMatch = mode === 'MATCH';
+        const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
+        
         const data = {
-            type: isM ? "MATCH" : "JOIN_REQUEST",
-            player1: document.getElementById(isM ? 'p1' : 'j_name').value,
-            pin: document.getElementById(isM ? 'pin' : 'j_pin').value,
-            score1: isM ? document.getElementById('s1').value : null,
-            score2: isM ? document.getElementById('s2').value : null,
-            player2: isM ? document.getElementById('p2').value : null,
-            p1_180s: isM ? (document.getElementById('p1_180s').value || 0) : 0,
-            p1_hco: isM ? (document.getElementById('p1_hco').value || 0) : 0,
+            type: isMatch ? "MATCH" : "JOIN_REQUEST",
+            player1: document.getElementById(isMatch ? 'p1' : 'j_name').value,
+            pin: document.getElementById(isMatch ? 'pin' : 'j_pin').value,
+            score1: isMatch ? document.getElementById('s1').value : null,
+            score2: isMatch ? document.getElementById('s2').value : null,
+            player2: isMatch ? document.getElementById('p2').value : null,
+            p1_180s: isMatch ? (document.getElementById('p1_180s').value || 0) : null,
+            p1_hco: isMatch ? (document.getElementById('p1_hco').value || 0) : null,
             images: []
         };
 
-        if (isM && fileInput.files.length === 0) return alert("Photo proof is mandatory.");
-
-        if (fileInput.files.length > 0) {
-            for (let f of fileInput.files) {
-                const b64 = await toBase64(f);
-                data.images.push(b64.split(',')[1]);
+        if (fileInput && fileInput.files.length > 0) {
+            for (let file of fileInput.files) {
+                const base64 = await toBase64(file);
+                data.images.push(base64.split(',')[1]);
             }
         }
 
         try {
             await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            alert("Sent! Refreshing...");
+            alert("Success! Data sent to the club administrator.");
             location.reload();
-        } catch (e) { alert("Submission failed."); }
+        } catch (e) { alert("Submission failed. Check your internet connection."); }
     }
 
-    const toBase64 = f => new Promise((res, rej) => {
-        const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = e => rej(e);
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
     });
 </script>
 </body>
