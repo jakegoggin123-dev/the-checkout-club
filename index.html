@@ -27,11 +27,8 @@
         .stat-row { display: flex; gap: 10px; margin-bottom: 5px; }
         .stat-row input { flex: 1; font-size: 12px; }
         .stat-label { font-size: 11px; color: var(--gold); margin-bottom: 2px; display: block; }
+        .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 10px; border-radius: 5px; font-size: 13px; margin: 10px 0; font-weight: bold; }
         button.main-submit { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        .rules-list { line-height: 1.6; list-style: none; padding: 0; }
-        .rules-list li { margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
-        .rules-list li strong { color: var(--gold); }
-        .example-box { background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid var(--gold); margin: 10px 0; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -55,18 +52,7 @@
 <div class="container">
     <div id="NEWS" class="league-section active"><div class="card"><h2>📢 Announcements</h2><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false"></iframe></div></div>
 
-    <div id="RULES" class="league-section">
-        <div class="card">
-            <h2>📜 League Rules</h2>
-            <ul class="rules-list">
-                <li><strong>Format:</strong> Best of 7 legs.</li>
-                <li><strong>Points:</strong> 3 for a Win + 1 Point per leg won.</li>
-                <div class="example-box"><strong>Example:</strong> 4-2 win = 7 pts for winner, 2 pts for loser.</div>
-                <li><strong>Video:</strong> Camera must be on.</li>
-                <li><strong>Verification:</strong> Screenshot required for all submissions.</li>
-            </ul>
-        </div>
-    </div>
+    <div id="RULES" class="league-section"><div class="card"><h2>📜 League Rules</h2><p>Best of 7 legs. 3 points for win + 1 point per leg won. Camera must be on.</p></div></div>
 
     <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
     <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
@@ -83,31 +69,31 @@
             
             <div style="display:flex; gap:10px;"><input type="number" id="s1" placeholder="Your Legs"><input type="number" id="s2" placeholder="Opponent Legs"></div>
             
-            <span class="stat-label">180s Thrown</span>
-            <div class="stat-row"><input type="number" id="p1_180s" placeholder="Your 180s"><input type="number" id="p2_180s" placeholder="Opponent 180s"></div>
+            <span class="stat-label">180s (Optional)</span>
+            <div class="stat-row">
+                <input type="number" id="p1_180s" placeholder="Your 180s" oninput="checkStats()">
+                <input type="number" id="p2_180s" placeholder="Opponent 180s" oninput="checkStats()">
+            </div>
             
-            <span class="stat-label">Highest Checkout</span>
-            <div class="stat-row"><input type="number" id="p1_hco" placeholder="Your High CO"><input type="number" id="p2_hco" placeholder="Opponent High CO"></div>
+            <span class="stat-label">High Checkout (Optional)</span>
+            <div class="stat-row">
+                <input type="number" id="p1_hco" placeholder="Your High CO" oninput="checkStats()">
+                <input type="number" id="p2_hco" placeholder="Opponent High CO" oninput="checkStats()">
+            </div>
 
-            <input type="file" id="screenshot" accept="image/*">
+            <div id="statWarning" class="warning-msg">
+                ⚠️ Proof Required: Please ensure 180s and High Checkouts are visible in your match screenshot or attach separate photos of the board.
+            </div>
+
+            <span class="stat-label">Attach Screenshots (Select Multiple)</span>
+            <input type="file" id="screenshot" accept="image/*" multiple>
+            
             <button class="main-submit" onclick="handleSend('MATCH')">SUBMIT RESULT</button>
         </div>
     </div>
 
     <div id="JOIN" class="league-section">
-        <div class="card">
-            <h2>📝 Join Club</h2>
-            <input type="text" id="j_name" placeholder="Full Name">
-            <input type="password" id="j_pin" placeholder="Choose 4-Digit PIN">
-            <select id="j_league">
-                <option value="PL">Premiership (60+ Avg)</option>
-                <option value="CH">Championship (50-59.9 Avg)</option>
-                <option value="L1">League 1 (40-49.9 Avg)</option>
-                <option value="L2">League 2 (Under 40 Avg)</option>
-            </select>
-            <input type="file" id="j_photo" accept="image/*">
-            <button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
-        </div>
+        <div class="card"><h2>📝 Join Club</h2><input type="text" id="j_name" placeholder="Full Name"><input type="password" id="j_pin" placeholder="PIN"><button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button></div>
     </div>
 </div>
 
@@ -119,11 +105,27 @@
         document.getElementById(id).classList.add('active');
         window.scrollTo(0, 0);
     }
+
     function toggleView(leagueId, viewType) {
         document.getElementById(leagueId + '-table').classList.remove('sub-active');
         document.getElementById(leagueId + '-fixtures').classList.remove('sub-active');
         document.getElementById(leagueId + '-' + viewType).classList.add('sub-active');
     }
+
+    function checkStats() {
+        const p1_180 = document.getElementById('p1_180s').value;
+        const p2_180 = document.getElementById('p2_180s').value;
+        const p1_hco = document.getElementById('p1_hco').value;
+        const p2_hco = document.getElementById('p2_hco').value;
+        const warning = document.getElementById('statWarning');
+        
+        if(p1_180 > 0 || p2_180 > 0 || p1_hco > 0 || p2_hco > 0) {
+            warning.style.display = 'block';
+        } else {
+            warning.style.display = 'none';
+        }
+    }
+
     async function fetchOpponents() {
         const p1 = document.getElementById('p1').value;
         const pin = document.getElementById('pin').value;
@@ -133,7 +135,6 @@
             const opponents = await response.json();
             const select = document.getElementById('p2');
             select.innerHTML = '<option value="">-- Select Opponent --</option>';
-            if(opponents.length === 0) { alert("No pending fixtures found."); return; }
             opponents.forEach(opp => {
                 let opt = document.createElement('option');
                 opt.value = opt.innerHTML = opp;
@@ -141,35 +142,45 @@
             });
         } catch (e) { alert("Error connecting to database."); }
     }
+
     async function handleSend(mode) {
         const isMatch = mode === 'MATCH';
         const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
-        if(!fileInput.files[0]) { alert("Please upload a screenshot."); return; }
-        const reader = new FileReader();
-        reader.onload = async function() {
-            const data = {
-                type: isMatch ? "MATCH" : "JOIN_REQUEST",
-                player1: document.getElementById(isMatch ? 'p1' : 'j_name').value,
-                pin: document.getElementById(isMatch ? 'pin' : 'j_pin').value,
-                score1: isMatch ? document.getElementById('s1').value : null,
-                score2: isMatch ? document.getElementById('s2').value : null,
-                player2: isMatch ? document.getElementById('p2').value : null,
-                p1_180s: isMatch ? document.getElementById('p1_180s').value : null,
-                p2_180s: isMatch ? document.getElementById('p2_180s').value : null,
-                p1_hco: isMatch ? document.getElementById('p1_hco').value : null,
-                p2_hco: isMatch ? document.getElementById('p2_hco').value : null,
-                league: isMatch ? null : document.getElementById('j_league').value,
-                imageBlob: reader.result.split(',')[1],
-                imageType: fileInput.files[0].type
-            };
-            try {
-                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-                alert("Success! Submitted to Admin.");
-                location.reload();
-            } catch (e) { alert("Error sending."); }
+        if(!fileInput.files.length) { alert("Please attach at least one screenshot."); return; }
+
+        const data = {
+            type: isMatch ? "MATCH" : "JOIN_REQUEST",
+            player1: document.getElementById(isMatch ? 'p1' : 'j_name').value,
+            pin: document.getElementById(isMatch ? 'pin' : 'j_pin').value,
+            score1: isMatch ? document.getElementById('s1').value : null,
+            score2: isMatch ? document.getElementById('s2').value : null,
+            player2: isMatch ? document.getElementById('p2').value : null,
+            p1_180s: isMatch ? (document.getElementById('p1_180s').value || 0) : null,
+            p2_180s: isMatch ? (document.getElementById('p2_180s').value || 0) : null,
+            p1_hco: isMatch ? (document.getElementById('p1_hco').value || 0) : null,
+            p2_hco: isMatch ? (document.getElementById('p2_hco').value || 0) : null,
+            images: []
         };
-        reader.readAsDataURL(fileInput.files[0]);
+
+        // Handle Multiple Images
+        for (let file of fileInput.files) {
+            const base64 = await toBase64(file);
+            data.images.push(base64.split(',')[1]);
+        }
+
+        try {
+            await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+            alert("Success! Submitted to Admin.");
+            location.reload();
+        } catch (e) { alert("Error sending."); }
     }
+
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 </script>
 </body>
 </html>
