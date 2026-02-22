@@ -6,52 +6,103 @@
     <title>The Checkout Club</title>
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; }
-        body { font-family: 'Arial Black', sans-serif; background: var(--dark); color: white; margin: 0; text-align: center; }
-        nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; z-index: 100; display: flex; overflow-x: auto; gap: 15px; justify-content: center; }
-        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; padding: 5px 10px; }
-        nav a:hover { color: var(--gold); }
-        .container { max-width: 800px; margin: auto; padding: 15px; }
+        body { font-family: sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
+        nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; z-index: 1000; }
+        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 5px 10px; font-size: 12px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+        nav a:hover { background: var(--red); }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
         .league-section { display: none; }
         .active { display: block !important; }
-        .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        iframe { width: 100%; height: 550px; border-radius: 10px; border: none; background: white; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #f0f0f0; color: #333; font-weight: bold; }
-        button { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; margin-top: 10px; }
-        button:hover { background: #c1121f; transform: translateY(-2px); }
-        .rule-text { text-align: left; font-size: 0.9em; line-height: 1.5; font-family: 'Arial', sans-serif; }
+        .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; }
+        iframe { width: 100%; height: 500px; border: none; background: white; border-radius: 10px; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        button { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a onclick="show('NEWS')">News</a>
-    <a onclick="show('PL')">Premier</a>
-    <a onclick="show('CH')">Champ</a>
-    <a onclick="show('L1')">League 1</a>
-    <a onclick="show('L2')">League 2</a>
-    <a onclick="show('SUBMIT')" style="color:var(--gold)">Submit Score</a>
-    <a onclick="show('JOIN')" style="color:#00ffcc">Join Club</a>
+    <a onclick="show('NEWS')">NEWS</a>
+    <a onclick="show('PL')">PREMIER</a>
+    <a onclick="show('CH')">CHAMP</a>
+    <a onclick="show('SUBMIT')">SUBMIT SCORE</a>
+    <a onclick="show('JOIN')">JOIN CLUB</a>
 </nav>
 
 <div class="container">
-    <h1 style="color:var(--gold); text-shadow: 2px 2px black;">THE CHECKOUT CLUB</h1>
+    <h1 style="color:var(--gold)">THE CHECKOUT CLUB</h1>
 
     <div id="NEWS" class="league-section active">
         <div class="card">
-            <h2>📢 Club Announcements</h2>
+            <h2>📢 Announcements</h2>
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false"></iframe>
         </div>
     </div>
 
-    <div id="PL" class="league-section"><div class="card"><h2>🏆 Premier League</h2><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div></div>
-    <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div></div>
-    <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div></div>
-    <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div></div>
+    <div id="PL" class="league-section">
+        <div class="card">
+            <h2>🏆 Premier League</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe>
+        </div>
+    </div>
+
+    <div id="CH" class="league-section">
+        <div class="card">
+            <h2>🥈 Championship</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe>
+        </div>
+    </div>
 
     <div id="SUBMIT" class="league-section">
         <div class="card">
-            <h2>🎯 Submit Match Result</h2>
-            <input type="text" id="p1" placeholder="Your Registered Name">
+            <h2>🎯 Submit Score</h2>
+            <input type="text" id="p1" placeholder="Your Name">
             <input type="password" id="pin" placeholder="Your 4-Digit PIN">
             <div style="display:flex; gap:10px;">
                 <input type="number" id="s1" placeholder="Your Legs">
+                <input type="number" id="s2" placeholder="Opponent Legs">
+            </div>
+            <input type="text" id="p2" placeholder="Opponent Name">
+            <input type="file" id="screenshot" accept="image/*">
+            <button onclick="handleSend('MATCH')">SUBMIT RESULT</button>
+        </div>
+    </div>
+
+    <div id="JOIN" class="league-section">
+        <div class="card">
+            <h2>📝 Join Club</h2>
+            <input type="text" id="j_name" placeholder="Full Name">
+            <input type="password" id="j_pin" placeholder="Choose 4-Digit PIN">
+            <select id="j_league">
+                <option value="PL">Premier League</option>
+                <option value="CH">Championship</option>
+            </select>
+            <input type="file" id="j_photo" accept="image/*">
+            <button onclick="handleSend('JOIN')">SEND APPLICATION</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function show(id) {
+        // Hide all
+        const sections = document.querySelectorAll('.league-section');
+        for (let s of sections) {
+            s.classList.remove('active');
+        }
+        // Show target
+        const target = document.getElementById(id);
+        if (target) {
+            target.classList.add('active');
+        }
+        window.scrollTo(0, 0);
+    }
+
+    function handleSend(type) {
+        alert("Preparing to send " + type + " data to Google Sheets...");
+        // Sending logic is disabled for this test to ensure buttons work first!
+    }
+</script>
+
+</body>
+</html>
