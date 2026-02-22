@@ -98,4 +98,59 @@
             </select>
             <p style="font-size: 0.8em; color: var(--gold);">Upload screenshot of DartCounter stats:</p>
             <input type="file" id="j_photo" accept="image/*">
-            <button onclick="handleSend('JOIN')">
+            <button onclick="handleSend('JOIN')">SEND APPLICATION</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function show(id) {
+        const sections = document.querySelectorAll('.league-section');
+        for (let s of sections) {
+            s.classList.remove('active');
+        }
+        const target = document.getElementById(id);
+        if (target) {
+            target.classList.add('active');
+        }
+        window.scrollTo(0, 0);
+    }
+
+    async function handleSend(mode) {
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec';
+        const isMatch = mode === 'MATCH';
+        const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
+        const file = fileInput.files[0];
+        
+        if(!file) { alert("Please upload the required screenshot."); return; }
+        
+        alert("Sending to Club Sheet... please wait for the success message.");
+
+        const reader = new FileReader();
+        reader.onload = async function() {
+            const data = {
+                type: isMatch ? "MATCH" : "JOIN_REQUEST",
+                player1: document.getElementById(isMatch ? 'p1' : 'j_name').value,
+                pin: document.getElementById(isMatch ? 'pin' : 'j_pin').value,
+                score1: isMatch ? document.getElementById('s1').value : null,
+                score2: isMatch ? document.getElementById('s2').value : null,
+                player2: isMatch ? document.getElementById('p2').value : null,
+                league: isMatch ? null : document.getElementById('j_league').value,
+                imageBlob: reader.result.split(',')[1],
+                imageType: file.type
+            };
+
+            try {
+                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+                alert("Success! The Club Sheet has been updated.");
+                location.reload();
+            } catch (e) {
+                alert("Error sending. Check your internet.");
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+
+</body>
+</html>
