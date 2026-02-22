@@ -2,52 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Checkout Club</title>
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
+        
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; overflow-x: hidden; }
         
         /* Header & Logo */
         .header-brand { padding: 30px 10px 10px 10px; }
         .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); border: 2px solid var(--gold); }
         
-        /* Responsive Nav */
+        /* Nav */
         nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); color: white; }
         
-        /* Container & Layout */
-        .container { max-width: 900px; margin: auto; padding: 20px; }
+        /* Layout */
+        .container { max-width: 900px; margin: auto; padding: 20px; box-sizing: border-box; }
         .league-section { display: none; }
         .active { display: block !important; }
         .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; line-height: 1.6; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; }
         
-        /* News Mobile Fix */
-        .news-frame { width: 100%; height: 500px; border: none; background: white; border-radius: 10px; }
-        
-        /* Rules List Style */
+        /* NEWS SCALE FIX: Keeping this to stop side-scrolling */
+        .news-container { 
+            width: 100%; 
+            height: 500px; 
+            overflow: hidden; 
+            border-radius: 10px; 
+            background: white; 
+            position: relative; 
+        }
+        .news-frame { 
+            width: 200%; 
+            height: 200%; 
+            border: none; 
+            transform: scale(0.5); 
+            transform-origin: 0 0; 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+        }
+
+        /* Rules */
         .rules-list { list-style: none; padding: 0; color: var(--text); }
         .rules-list li { margin-bottom: 15px; padding-left: 25px; position: relative; }
         .rules-list li::before { content: '🎯'; position: absolute; left: 0; }
         .rules-list strong { color: var(--gold); }
         .rules-sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; }
 
-        /* Controls & Inputs */
+        /* Controls & Form Elements */
         .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
         .view-btn { background: #45a29e; color: white; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
-        .view-btn:hover { background: #66fcf1; color: var(--dark); }
         .sub-view { display: none; }
         .sub-active { display: block !important; }
+        
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #45a29e; background: #0b0c10; color: white; box-sizing: border-box; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #45a29e; background: #0b0c10; color: white; box-sizing: border-box; font-size: 16px; }
         .stat-row { display: flex; gap: 10px; margin-bottom: 5px; }
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
         .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 12px; border-radius: 5px; font-size: 13px; margin: 15px 0; font-weight: bold; }
+        
         button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        button.main-submit:hover { background: #ff4d5a; }
+
+        @media (max-width: 600px) {
+            .logo { width: 130px; height: 130px; }
+            nav a { padding: 6px 8px; font-size: 9px; }
+        }
     </style>
 </head>
 <body>
@@ -73,7 +96,9 @@
     <div id="NEWS" class="league-section active">
         <div class="card">
             <h2>📢 Announcements</h2>
-            <iframe class="news-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false&rm=minimal"></iframe>
+            <div class="news-container">
+                <iframe class="news-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pub?gid=1947364654&single=true&range=A1:A40&widget=false&chrome=false"></iframe>
+            </div>
         </div>
     </div>
 
@@ -188,7 +213,7 @@
 
     async function handleSend(mode) {
         const isMatch = mode === 'MATCH';
-        const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
+        const fileInput = document.getElementById('screenshot');
         
         const data = {
             type: isMatch ? "MATCH" : "JOIN_REQUEST",
