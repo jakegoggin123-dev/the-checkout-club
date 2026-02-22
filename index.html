@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Checkout Club</title>
 <style>
-:root { --red: #e63946; --white: #f1faee; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; }
-body { font-family: 'Arial Black', sans-serif; background: var(--dark); color: white; margin: 0; text-align: center; }
-nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; z-index: 100; overflow-x: auto; white-space: nowrap; }
-nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; }
-nav a:hover { color: var(--gold); }
+:root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; }
+body { font-family: sans-serif; background: var(--dark); color: white; margin: 0; text-align: center; }
+nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; z-index: 100; display: flex; overflow-x: auto; gap: 15px; }
+nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; white-space: nowrap; font-size: 14px; }
 .container { max-width: 800px; margin: auto; padding: 15px; }
-h1 { color: var(--gold); text-shadow: 2px 2px black; font-size: 2.2em; margin: 10px 0; }
-.card { background: var(--card); padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #45a29e; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 .league-section { display: none; }
 .active { display: block; }
-input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; background: #f0f0f0; color: #333; }
-button { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
-button:hover { background: #c1121f; transform: translateY(-2px); }
-iframe { width: 100%; height: 500px; border-radius: 10px; border: none; background: white; }
-.rule-text { text-align: left; font-size: 0.9em; line-height: 1.5; font-family: 'Arial', sans-serif; }
+.card { background: var(--card); padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #45a29e; }
+iframe { width: 100%; height: 500px; border: none; background: white; border-radius: 10px; }
+input, select { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; }
+button { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
 </style>
 </head>
 <body>
 
 <nav>
-<a onclick="show('NEWS')">News</a>
-<a onclick="show('PL')">Premier</a>
-<a onclick="show('CH')">Champ</a>
-<a onclick="show('L1')">League 1</a>
-<a onclick="show('L2')">League 2</a>
-<a onclick="show('SUBMIT')" style="color:var(--gold)">Submit Score</a>
-<a onclick="show('JOIN')" style="color:#00ffcc">Join Club</a>
-<a onclick="show('RULES')">Rules</a>
+<a onclick="show('NEWS')">NEWS</a>
+<a onclick="show('PL')">PREMIER</a>
+<a onclick="show('CH')">CHAMP</a>
+<a onclick="show('L1')">L1</a>
+<a onclick="show('L2')">L2</a>
+<a onclick="show('SUBMIT')">SUBMIT SCORE</a>
+<a onclick="show('JOIN')">JOIN</a>
 </nav>
 
 <div class="container">
-<h1>THE CHECKOUT CLUB</h1>
+<h1 style="color:var(--gold)">THE CHECKOUT CLUB</h1>
 
 </div>
 
 <script>
 function show(id) {
+console.log("Switching to: " + id);
 const sections = document.querySelectorAll('.league-section');
 sections.forEach(s => s.classList.remove('active'));
-const target = document.getElementById(id);
-if (target) { target.classList.add('active'); }
-window.scrollTo(0, 0);
+document.getElementById(id).classList.add('active');
 }
 
 </script>
