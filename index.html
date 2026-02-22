@@ -67,25 +67,22 @@
             <button type="button" onclick="fetchOpponents()" style="background:#45a29e; color:white; border:none; padding:10px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold; cursor:pointer;">FIND MY FIXTURES</button>
             <select id="p2"><option value="">-- Select Opponent --</option></select>
             
-            <div style="display:flex; gap:10px;"><input type="number" id="s1" placeholder="Your Legs"><input type="number" id="s2" placeholder="Opponent Legs"></div>
-            
-            <span class="stat-label">180s (Optional)</span>
-            <div class="stat-row">
-                <input type="number" id="p1_180s" placeholder="Your 180s" oninput="checkStats()">
-                <input type="number" id="p2_180s" placeholder="Opponent 180s" oninput="checkStats()">
+            <div style="display:flex; gap:10px;">
+                <input type="number" id="s1" placeholder="Your Legs Won">
+                <input type="number" id="s2" placeholder="Opponent Legs Won">
             </div>
             
-            <span class="stat-label">High Checkout (Optional)</span>
+            <span class="stat-label">Your Stats (Optional)</span>
             <div class="stat-row">
-                <input type="number" id="p1_hco" placeholder="Your High CO" oninput="checkStats()">
-                <input type="number" id="p2_hco" placeholder="Opponent High CO" oninput="checkStats()">
+                <input type="number" id="p1_180s" placeholder="How many 180s?" oninput="checkStats()">
+                <input type="number" id="p1_hco" placeholder="Highest Checkout" oninput="checkStats()">
             </div>
 
             <div id="statWarning" class="warning-msg">
-                ⚠️ Proof Required: Please ensure 180s and High Checkouts are visible in your match screenshot or attach separate photos of the board.
+                ⚠️ Proof Required: Please ensure your 180s and High Checkouts are visible in your match result screenshot or attach separate photos of the board.
             </div>
 
-            <span class="stat-label">Attach Screenshots (Select Multiple)</span>
+            <span class="stat-label">Attach Proof (Select Multiple)</span>
             <input type="file" id="screenshot" accept="image/*" multiple>
             
             <button class="main-submit" onclick="handleSend('MATCH')">SUBMIT RESULT</button>
@@ -113,17 +110,10 @@
     }
 
     function checkStats() {
-        const p1_180 = document.getElementById('p1_180s').value;
-        const p2_180 = document.getElementById('p2_180s').value;
-        const p1_hco = document.getElementById('p1_hco').value;
-        const p2_hco = document.getElementById('p2_hco').value;
+        const val1 = document.getElementById('p1_180s').value;
+        const val2 = document.getElementById('p1_hco').value;
         const warning = document.getElementById('statWarning');
-        
-        if(p1_180 > 0 || p2_180 > 0 || p1_hco > 0 || p2_hco > 0) {
-            warning.style.display = 'block';
-        } else {
-            warning.style.display = 'none';
-        }
+        (val1 > 0 || val2 > 0) ? warning.style.display = 'block' : warning.style.display = 'none';
     }
 
     async function fetchOpponents() {
@@ -146,7 +136,7 @@
     async function handleSend(mode) {
         const isMatch = mode === 'MATCH';
         const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
-        if(!fileInput.files.length) { alert("Please attach at least one screenshot."); return; }
+        if(!fileInput.files.length) { alert("Please attach proof."); return; }
 
         const data = {
             type: isMatch ? "MATCH" : "JOIN_REQUEST",
@@ -156,13 +146,10 @@
             score2: isMatch ? document.getElementById('s2').value : null,
             player2: isMatch ? document.getElementById('p2').value : null,
             p1_180s: isMatch ? (document.getElementById('p1_180s').value || 0) : null,
-            p2_180s: isMatch ? (document.getElementById('p2_180s').value || 0) : null,
             p1_hco: isMatch ? (document.getElementById('p1_hco').value || 0) : null,
-            p2_hco: isMatch ? (document.getElementById('p2_hco').value || 0) : null,
             images: []
         };
 
-        // Handle Multiple Images
         for (let file of fileInput.files) {
             const base64 = await toBase64(file);
             data.images.push(base64.split(',')[1]);
