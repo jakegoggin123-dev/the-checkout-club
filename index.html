@@ -191,7 +191,7 @@
                 <option value="League 2">League 2 (Avg < 45)</option>
             </select>
             
-            <span class="stat-label">Upload Average Proof (Screenshots)</span>
+            <span class="stat-label">Upload Average Proof (Required) <span style="color:var(--red);">*</span></span>
             <input type="file" id="j_screenshot" accept="image/*" multiple>
             
             <button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
@@ -200,7 +200,7 @@
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
+    const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
     function show(id) {
         document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active'));
@@ -231,6 +231,12 @@
         const isM = mode === 'MATCH';
         const fileInput = document.getElementById(isM ? 'screenshot' : 'j_screenshot');
         
+        // MANDATORY CHECK FOR JOIN PAGE
+        if (!isM && (!fileInput.files || fileInput.files.length === 0)) {
+            alert("⚠️ Please attach a screenshot of your averages to complete your application.");
+            return;
+        }
+        
         const data = {
             type: isM ? "MATCH" : "JOIN_REQUEST",
             player1: document.getElementById(isM ? 'p1' : 'j_name').value,
@@ -244,6 +250,10 @@
             images: []
         };
 
+        const btn = event.target;
+        btn.disabled = true;
+        btn.innerHTML = "SENDING...";
+
         if (fileInput && fileInput.files.length > 0) {
             for (let f of fileInput.files) {
                 const b64 = await toBase64(f);
@@ -256,7 +266,11 @@
             alert(isM ? "Match Result Submitted!" : "Application Sent Successfully!"); 
             location.reload(); 
         })
-        .catch(err => alert("Submission failed."));
+        .catch(err => {
+            alert("Submission failed.");
+            btn.disabled = false;
+            btn.innerHTML = "RETRY";
+        });
     }
 
     const toBase64 = f => new Promise((res, rej) => {
