@@ -14,16 +14,28 @@
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); }
         
-        /* Layout Containers */
+        /* Layout */
         .container { max-width: 900px; margin: auto; padding: 20px; box-sizing: border-box; }
         .league-section { display: none; }
         .active { display: block !important; }
         .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 20px; text-align: left; line-height: 1.6; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; }
         
-        /* NEWS SCALE FIX */
-        .news-container { width: 100%; height: 500px; overflow: hidden; border-radius: 10px; background: white; position: relative; }
-        .news-frame { width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: 0 0; position: absolute; left: 0; top: 0; }
+        /* SEAMLESS NEWS FIX: This hides the Google UI and makes it "Dark Mode" */
+        .news-wrapper { 
+            width: 100%; 
+            height: 450px; 
+            overflow: hidden; 
+            border-radius: 10px; 
+            background: #ffffff; /* We keep the bg white so text is black/readable, or we can invert it */
+            position: relative;
+        }
+        .news-frame { 
+            width: 100%; 
+            height: 600px; 
+            border: none; 
+            margin-top: -65px; /* Hides the Google Sheet Header */
+        }
 
         /* Rules Style */
         .rules-list { list-style: none; padding: 0; color: var(--text); }
@@ -31,8 +43,9 @@
         .rules-list li::before { content: '🎯'; position: absolute; left: 0; }
         .rules-sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; color: #aeb0b1; }
 
-        /* Tables & Inputs */
-        iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
+        /* General Iframe for Tables */
+        .table-frame { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
+        
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
         .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 12px; border-radius: 5px; font-size: 13px; margin: 15px 0; font-weight: bold; }
@@ -73,7 +86,7 @@
     <div id="NEWS" class="league-section active">
         <div class="card">
             <h2>📢 Announcements</h2>
-            <div class="news-container">
+            <div class="news-wrapper">
                 <iframe class="news-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false&rm=minimal"></iframe>
             </div>
         </div>
@@ -92,16 +105,15 @@
                 </li>
                 <li><strong>Season Structure:</strong> Seasons last <strong>8 weeks</strong>. Fixtures are generated weekly. You have a 14-day window to play.</li>
                 <li><strong>Submission:</strong> A screenshot of the final score is mandatory.</li>
-                <li><strong>Stats:</strong> 180s and High Checkouts (100+) must be evidenced via photo to count for leaderboards.</li>
-                <li><strong>Promotion/Relegation:</strong> Top 2 move up, Bottom 2 move down every 8 weeks.</li>
+                <li><strong>Stats:</strong> 180s and High Checkouts (100+) must be evidenced via photo.</li>
             </ul>
         </div>
     </div>
 
-    <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div><div id="L1-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div><div id="L2-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe></div></div></div>
+    <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
+    <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
+    <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div><div id="L1-fixtures" class="sub-view"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe></div></div></div>
+    <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div><div id="L2-fixtures" class="sub-view"><iframe class="table-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe></div></div></div>
 
     <div id="SUBMIT" class="league-section">
         <div class="card">
@@ -133,7 +145,6 @@
     <div id="JOIN" class="league-section">
         <div class="card">
             <h2>📝 Join The Club</h2>
-            <p style="text-align:center; color:var(--text); font-size:14px;">New members start in League 2.</p>
             <input type="text" id="j_name" placeholder="Full Name">
             <input type="password" id="j_pin" placeholder="Choose 4-Digit PIN">
             <button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
