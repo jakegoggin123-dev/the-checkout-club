@@ -7,6 +7,7 @@
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; }
         
+        /* Stop the browser from allowing any side-to-side movement */
         html, body { 
             overflow-x: hidden !important; 
             width: 100%;
@@ -19,12 +20,13 @@
             text-align: center;
         }
 
-        /* Layout & Nav */
+        /* Layout */
         .header-brand { padding: 25px 10px 10px 10px; }
         .logo { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 15px rgba(230, 57, 70, 0.4); }
         
+        /* Navigation - Restored Full Names */
         nav { background: var(--card); padding: 12px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; z-index: 1000; }
-        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 7px 9px; font-size: 10px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; }
+        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 7px 9px; font-size: 10px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); }
         
         .container { width: 100%; max-width: 900px; margin: auto; padding: 15px; box-sizing: border-box; }
@@ -34,7 +36,7 @@
         .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; font-size: 1.4em; }
         
-        /* THE FIX: News Iframe Scaling */
+        /* THE NEWS FIX: Forced Scaling */
         .news-container { 
             width: 100%; 
             height: 500px;
@@ -44,17 +46,17 @@
             position: relative;
         }
         .news-frame { 
-            width: 200%; /* Make it double width */
+            width: 200%; /* Render at double size */
             height: 200%; 
             border: none;
-            transform: scale(0.5); /* Shrink it back to fit */
+            transform: scale(0.5); /* Shrink back to 50% to fit mobile */
             transform-origin: 0 0;
             position: absolute;
             left: 0;
             top: 0;
         }
 
-        /* Rules */
+        /* Rules - Restored 🎯 Formatting */
         .rules-list { list-style: none; padding: 0; color: var(--text); font-size: 14px; line-height: 1.6; }
         .rules-list li { margin-bottom: 12px; padding-left: 28px; position: relative; }
         .rules-list li::before { content: '🎯'; position: absolute; left: 0; }
@@ -68,11 +70,11 @@
         .sub-view { display: none; }
         .sub-active { display: block !important; }
 
-        /* Forms */
+        /* Score Entry Form - Restored Multi-Photo & Warning */
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #45a29e; background: #0b0c10; color: white; box-sizing: border-box; font-size: 16px; }
         .stat-label { font-size: 11px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; text-transform: uppercase; }
         .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 10px; border-radius: 5px; font-size: 12px; margin: 10px 0; text-align: center; }
-        button.main-submit { background: var(--red); color: white; border: none; padding: 18px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        button.main-submit { background: var(--red); color: white; border: none; padding: 18px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
 
         @media (max-width: 600px) {
             .logo { width: 110px; height: 110px; }
@@ -95,7 +97,7 @@
 
 <div class="header-brand">
     <img src="1771773124234.png" alt="Logo" class="logo">
-    <h1 style="color:var(--gold); margin-top: 10px; letter-spacing: 2px; font-size: 1.6em;">THE CHECKOUT CLUB</h1>
+    <h1 style="color:var(--gold); margin-top: 10px; letter-spacing: 2px;">THE CHECKOUT CLUB</h1>
 </div>
 
 <div class="container">
@@ -113,17 +115,17 @@
         <div class="card">
             <h2>📜 League Rules & Format</h2>
             <ul class="rules-list">
-                <li><strong>Match Format:</strong> Best of 7 legs (First to 4).</li>
+                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong> (First to 4).</li>
                 <li><strong>Points System:</strong> 
                     <ul class="rules-sub-list">
-                        <li><strong>3 Points</strong> for the overall Match Win.</li>
-                        <li><strong>1 Point</strong> for every single leg won.</li>
+                        <li><strong>3 Points</strong> for the Match Win.</li>
+                        <li><strong>1 Point</strong> for every leg won.</li>
                     </ul>
                 </li>
                 <li><strong>Season Duration:</strong> 8 weeks. Fixtures have a 14-day play window.</li>
-                <li><strong>Submission:</strong> Result + Match photo are mandatory.</li>
-                <li><strong>Special Stats:</strong> 180s and High Checkouts (100+) require board photos to count.</li>
-                <li><strong>Promo/Relegation:</strong> Top 2 / Bottom 2 swap leagues every 8 weeks.</li>
+                <li><strong>Integrity:</strong> Cameras must be clear. Score screenshots are mandatory for submission.</li>
+                <li><strong>Stats:</strong> 180s and High Checkouts (100+) require photo evidence to count for leaderboards.</li>
+                <li><strong>Promotion/Relegation:</strong> Top 2 move up, Bottom 2 move down every 8 weeks.</li>
             </ul>
         </div>
     </div>
@@ -136,24 +138,24 @@
     <div id="SUBMIT" class="league-section">
         <div class="card">
             <h2>🎯 Submit Match Score</h2>
-            <input type="text" id="p1" placeholder="Registered Name">
+            <input type="text" id="p1" placeholder="Your Name">
             <input type="password" id="pin" placeholder="PIN">
-            <button type="button" onclick="fetchOpponents()" style="background:#45a29e; color:white; border:none; padding:10px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold;">LOAD MY GAMES</button>
+            <button type="button" onclick="fetchOpponents()" style="background:#45a29e; color:white; border:none; padding:10px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold;">LOAD MY FIXTURES</button>
             <select id="p2"><option value="">-- Select Opponent --</option></select>
             
             <div style="display:flex; gap:10px;">
                 <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1" placeholder="0"></div>
-                <div style="flex:1"><span class="stat-label">Their Legs</span><input type="number" id="s2" placeholder="0"></div>
+                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2" placeholder="0"></div>
             </div>
             
-            <span class="stat-label">Your Stats</span>
+            <span class="stat-label">Special Stats (If any)</span>
             <div style="display:flex; gap:10px;">
                 <input type="number" id="p1_180s" placeholder="180s" oninput="checkStats()">
-                <input type="number" id="p1_hco" placeholder="High CO" oninput="checkStats()">
+                <input type="number" id="p1_hco" placeholder="High Checkout" oninput="checkStats()">
             </div>
-            <div id="statWarning" class="warning-msg">⚠️ Photo evidence required for 180s/High CO.</div>
+            <div id="statWarning" class="warning-msg">⚠️ Proof required for 180s and High COs.</div>
 
-            <span class="stat-label">Match Proof (Select all photos)</span>
+            <span class="stat-label">Match Photos (Multiple photos allowed)</span>
             <input type="file" id="screenshot" accept="image/*" multiple>
             <button class="main-submit" onclick="handleSend('MATCH')">SUBMIT OFFICIAL RESULT</button>
         </div>
@@ -186,20 +188,22 @@
 
     function checkStats() {
         const warning = document.getElementById('statWarning');
-        (document.getElementById('p1_180s').value > 0 || document.getElementById('p1_hco').value > 0) ? warning.style.display='block' : warning.style.display='none';
+        const s180 = document.getElementById('p1_180s').value;
+        const hco = document.getElementById('p1_hco').value;
+        warning.style.display = (s180 > 0 || hco > 0) ? 'block' : 'none';
     }
 
     async function fetchOpponents() {
         const p1 = document.getElementById('p1').value;
         const pin = document.getElementById('pin').value;
-        if(!p1 || !pin) return alert("Enter Name/PIN");
+        if(!p1 || !pin) return alert("Enter Name and PIN");
         try {
             const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`);
             const data = await res.json();
             const sel = document.getElementById('p2');
             sel.innerHTML = '<option value="">-- Select Opponent --</option>';
             data.forEach(o => { let opt = document.createElement('option'); opt.value = opt.innerHTML = o; sel.appendChild(opt); });
-        } catch (e) { alert("Error loading fixtures."); }
+        } catch (e) { alert("Could not find fixtures."); }
     }
 
     async function handleSend(mode) {
@@ -216,18 +220,21 @@
             p1_hco: isM ? (document.getElementById('p1_hco').value || 0) : 0,
             images: []
         };
-        if (isM && fileInput.files.length === 0) return alert("Match photo required.");
+
+        if (isM && fileInput.files.length === 0) return alert("Photo proof is mandatory.");
+
         if (fileInput.files.length > 0) {
             for (let f of fileInput.files) {
                 const b64 = await toBase64(f);
                 data.images.push(b64.split(',')[1]);
             }
         }
+
         try {
             await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            alert("Success!");
+            alert("Sent! Refreshing...");
             location.reload();
-        } catch (e) { alert("Failed."); }
+        } catch (e) { alert("Submission failed."); }
     }
 
     const toBase64 = f => new Promise((res, rej) => {
