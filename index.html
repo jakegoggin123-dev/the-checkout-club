@@ -34,6 +34,69 @@ button { background: var(--red); color: white; border: none; padding: 15px; widt
 <div class="container">
 <h1 style="color:var(--gold)">THE CHECKOUT CLUB</h1>
 
+<div id="NEWS" class="league-section active">
+    <div class="card">
+        <h2>📢 News</h2>
+        <iframe src="[https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false](https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false)"></iframe>
+    </div>
+</div>
+
+<div id="PL" class="league-section">
+    <div class="card">
+        <h2>🏆 Premier League</h2>
+        <iframe src="[https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false](https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false)"></iframe>
+    </div>
+</div>
+
+<div id="CH" class="league-section">
+    <div class="card">
+        <h2>🥈 Championship</h2>
+        <iframe src="[https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false](https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false)"></iframe>
+    </div>
+</div>
+
+<div id="L1" class="league-section">
+    <div class="card">
+        <h2>🎯 League 1</h2>
+        <iframe src="[https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false](https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false)"></iframe>
+    </div>
+</div>
+
+<div id="L2" class="league-section">
+    <div class="card">
+        <h2>🎯 League 2</h2>
+        <iframe src="[https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false](https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false)"></iframe>
+    </div>
+</div>
+
+<div id="SUBMIT" class="league-section">
+    <div class="card">
+        <h2>🎯 Submit Score</h2>
+        <input type="text" id="p1" placeholder="Your Name">
+        <input type="password" id="pin" placeholder="PIN">
+        <input type="number" id="s1" placeholder="Your Legs">
+        <input type="number" id="s2" placeholder="Opponent Legs">
+        <input type="text" id="p2" placeholder="Opponent Name">
+        <input type="file" id="screenshot" accept="image/*">
+        <button onclick="handleSend('MATCH')">SUBMIT</button>
+    </div>
+</div>
+
+<div id="JOIN" class="league-section">
+    <div class="card">
+        <h2>📝 Join Club</h2>
+        <input type="text" id="j_name" placeholder="Full Name">
+        <input type="password" id="j_pin" placeholder="Create 4-Digit PIN">
+        <select id="j_league">
+            <option value="PL">Premier</option>
+            <option value="CH">Championship</option>
+            <option value="L1">League 1</option>
+            <option value="L2">League 2</option>
+        </select>
+        <input type="file" id="j_photo" accept="image/*">
+        <button onclick="handleSend('JOIN')">APPLY</button>
+    </div>
+</div>
 </div>
 
 <script>
@@ -44,6 +107,11 @@ sections.forEach(s => s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
+async function handleSend(mode) {
+    const scriptURL = &#39;[https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec](https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec)&#39;;
+    alert(&quot;Sending... please wait for the success message.&quot;);
+    // Logic for sending data goes here (simplified for testing navigation first)
+}
 </script>
 
 </body>
