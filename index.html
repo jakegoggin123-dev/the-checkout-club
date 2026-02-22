@@ -172,7 +172,7 @@
         if(!p1 || !pin) { alert("Enter Name and PIN first"); return; }
         
         // This scriptURL will be used for both fetching fixtures and sending results
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
         const url = `${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`;
         
         try {
