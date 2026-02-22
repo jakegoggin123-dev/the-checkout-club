@@ -6,63 +6,210 @@
     <title>The Checkout Club</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Baskervville&display=swap" rel="stylesheet">
     <style>
-        :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; --accent: #45a29e; }
-        
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; overflow-x: hidden; }
-        
-        .header-brand h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--gold); 
-            margin-top: 15px; 
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        :root { 
+            --red: #e63946; 
+            --gold: #ffcc00; 
+            --dark: #0b0c10; 
+            --card: #1f2833; 
+            --text: #c5c6c7; 
+            --accent: #45a29e; 
         }
 
-        nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
-        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { background: var(--red); }
-        
-        .container { max-width: 900px; margin: auto; padding: 20px; box-sizing: border-box; }
-        .league-section { display: none; }
-        .active { display: block !important; }
-        .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 20px; text-align: left; line-height: 1.6; }
-        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--dark); 
+            color: white; 
+            text-align: center; 
+            margin: 0; 
+            overflow-x: hidden; 
+        }
+
+        .header-brand h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            color: var(--gold); 
+            margin-top: 15px; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.8); 
+        }
+
+        nav { 
+            background: var(--card); 
+            padding: 15px; 
+            border-bottom: 3px solid var(--red); 
+            position: sticky; 
+            top: 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 8px; 
+            flex-wrap: wrap; 
+            z-index: 1000; 
+        }
+
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: bold; 
+            cursor: pointer; 
+            padding: 8px 12px; 
+            font-size: 11px; 
+            border-radius: 4px; 
+            background: rgba(255,255,255,0.05); 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+        }
+
+        nav a:hover { 
+            background: var(--red); 
+        }
+
+        .container { 
+            max-width: 900px; 
+            margin: auto; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+
+        .league-section { 
+            display: none; 
+        }
+
+        .active { 
+            display: block !important; 
+        }
+
+        .card { 
+            background: var(--card); 
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 1px solid var(--accent); 
+            margin-bottom: 20px; 
+            text-align: left; 
+            line-height: 1.6; 
+        }
+
         .card h2 { 
             text-align: center; 
             color: var(--gold); 
             margin-top: 0; 
             border-bottom: 1px solid rgba(255,204,0,0.2); 
             padding-bottom: 10px; 
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem; 
         }
-        
-        .custom-list { list-style: none; padding: 0; color: var(--text); }
-        .custom-list li { margin-bottom: 15px; padding-left: 30px; position: relative; word-wrap: break-word; }
-        .custom-list li::before { content: '🎯'; position: absolute; left: 0; }
-        .custom-list strong { color: var(--gold); display: block; margin-bottom: 4px; }
-        .sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; color: #aeb0b1; }
 
-        iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
-        
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
-        .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
-        button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; }
-        
-        .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .view-btn { background: var(--accent); color: white; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
-        .sub-view { display: none; }
-        .sub-active { display: block !important; }
+        .custom-list { 
+            list-style: none; 
+            padding: 0; 
+            color: var(--text); 
+        }
 
-        .header-brand { padding: 30px 10px 10px 10px; }
-        .logo { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
+        .custom-list li { 
+            margin-bottom: 15px; 
+            padding-left: 30px; 
+            position: relative; 
+            word-wrap: break-word; 
+        }
 
-        @media (max-width: 600px) {
-            nav a { padding: 6px 8px; font-size: 9px; }
-            .header-brand h1 { font-size: 2.2rem; }
+        .custom-list li::before { 
+            content: '🎯'; 
+            position: absolute; 
+            left: 0; 
+        }
+
+        .custom-list strong { 
+            color: var(--gold); 
+            display: block; 
+            margin-bottom: 4px; 
+        }
+
+        .sub-list { 
+            list-style: circle; 
+            margin-top: 5px; 
+            padding-left: 20px; 
+            color: #aeb0b1; 
+        }
+
+        iframe { 
+            width: 100%; 
+            height: 600px; 
+            border: none; 
+            background: white; 
+            border-radius: 10px; 
+        }
+
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 8px 0; 
+            border-radius: 5px; 
+            border: 1px solid var(--accent); 
+            background: var(--dark); 
+            color: white; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+        }
+
+        .stat-label { 
+            font-size: 12px; 
+            color: var(--gold); 
+            margin-top: 10px; 
+            display: block; 
+            font-weight: bold; 
+        }
+
+        button.main-submit { 
+            background: var(--red); 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            width: 100%; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 16px; 
+            margin-top: 15px; 
+        }
+
+        .view-controls { 
+            display: flex; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-bottom: 15px; 
+        }
+
+        .view-btn { 
+            background: var(--accent); 
+            color: white; 
+            border: none; 
+            padding: 10px 18px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 12px; 
+            font-weight: bold; 
+        }
+
+        .sub-view { 
+            display: none; 
+        }
+
+        .sub-active { 
+            display: block !important; 
+        }
+
+        .logo { 
+            width: 150px; 
+            height: 150px; 
+            border-radius: 50%; 
+            border: 2px solid var(--gold); 
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); 
+        }
+
+        @media (max-width: 600px) { 
+            nav a { padding: 6px 8px; font-size: 9px; } 
+            .header-brand h1 { font-size: 2.2rem; } 
         }
     </style>
 </head>
@@ -92,32 +239,23 @@
             <ul class="custom-list">
                 <li>
                     <strong>🎯 Welcome to The Checkout Club | Season 1</strong>
-                    We are thrilled to officially launch The Checkout Club, a brand-new competitive darts community designed for players of all levels to test their mettle in a structured league format.
+                    We are thrilled to officially launch Season 1! Placement is based on your initial averages, but your future rank is earned at the oche.
                 </li>
                 <li>
-                    <strong>🗓️ Season 1 Launch: March 1st</strong>
-                    Our inaugural season officially kicks off on March 1st. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible. The Checkout Club is ran by the community, any rulings will be dealt with by admins, and any league/format or other play related changes will always go down to a community vote before a change is enacted.
+                    <strong>⚙️ Tiered Placement System</strong>
+                    <ul class="sub-list">
+                        <li>Premiership: 55+</li>
+                        <li>Championship: 47-55</li>
+                        <li>League 1: 40-47</li>
+                        <li>League 2: 40 and below</li>
+                    </ul>
+                    <em>Averages are for initial placement; promotion and relegation are performance-based.</em>
                 </li>
                 <li>
-                    <strong>⚙️ How the League Works</strong>
-                    <strong>The Format:</strong> Leagues are split into four tiers: Premiership, Championship, League 1, and League 2.<br>
-                    <strong>Season Duration:</strong> Each season lasts 8 weeks, followed by a short break for promotions, relegations, and registration of new members.<br>
-                    <strong>Weekly Fixtures:</strong> You will be assigned 3 matches / opponents each week. You have 7 days to complete the three fixtures, we understand that holidays/personal/work commitments may not allow all three games to be played in the week, is this is the case please let an admin know and we can extend as necessary on a case by case basis. If no reasonable request for extension has been made the non available player will be awarded the loss and the available player will be awarded the full 7 points.
-                </li>
-                <li>
-                    <strong>📜 Brief Rules Summary</strong>
-                    <strong>Match Format:</strong> All matches are Best of 7 legs.<br>
-                    <strong>Scoring:</strong> 3 Points for the Match Win. 1 Point for every single leg you win (e.g., a 4-2 win earns the winner 7 points and the loser 2 points).<br>
-                    <strong>Proof:</strong> A screenshot of the final score must be uploaded via the Submit Score page. If you throw a 180 or a High Checkout, please ensure these are visible in the photo or attach a separate screenshot of the result showing these stats.
-                </li>
-                <li>
-                    <strong>🖱️ Using the Site</strong>
-                    <strong>Check Standings:</strong> See the live table and top performers.<br>
-                    <strong>Find Fixtures:</strong> Use the "Find My Fixtures" button on the Submit page to see who you owe a game to.<br>
-                    <strong>Submit Results:</strong> Use your registered Name and 4-digit PIN to log your scores instantly.
+                    <strong>🗓️ Season Duration</strong>
+                    Each season lasts 8 weeks. You are assigned 3 matches per week and have 7 days to complete them. Request extensions via admins if needed.
                 </li>
             </ul>
-            <p style="text-align: center; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: bold; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px;">Let’s toe the oche and make Season 1 a classic! — The Checkout Club Admins</p>
         </div>
     </div>
 
@@ -125,24 +263,89 @@
         <div class="card">
             <h2>📜 League Rules & Format</h2>
             <ul class="custom-list">
-                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong> (First to 4). If a player reaches 4 legs, the match ends immediately.</li>
-                <li><strong>Points System:</strong> 
+                <li><strong>Match Format:</strong> Best of 7 legs (First to 4).</li>
+                <li><strong>Points System:</strong> 3 Points for a Match Win; 1 Point for every leg won.</li>
+                <li><strong>Season Structure:</strong> 
                     <ul class="sub-list">
-                        <li><strong>3 Points</strong> for the overall Match Win.</li>
-                        <li><strong>1 Point</strong> for every single leg won.</li>
+                        <li>Each season lasts <strong>8 weeks</strong>.</li>
+                        <li>Players receive <strong>3 fixtures per week</strong>.</li>
+                        <li>Fixtures must be completed within <strong>7 days</strong>.</li>
                     </ul>
                 </li>
-                <li><strong>Season Structure:</strong> Seasons last <strong>8 weeks</strong>. Fixtures are generated weekly. You have a 14-day window to play.</li>
-                <li><strong>Submission:</strong> A screenshot of the final score is mandatory via the Submit Score tab.</li>
-                <li><strong>Stats:</strong> 180s and High Checkouts (100+) must be evidenced via photo to be recorded.</li>
+                <li><strong>Division Averages (Initial Placement):</strong>
+                    <ul class="sub-list">
+                        <li>Premiership: 55+ | Championship: 47-55</li>
+                        <li>League 1: 40-47 | League 2: 40 & Below</li>
+                    </ul>
+                </li>
+                <li><strong>Promotion & Relegation:</strong> Movement between tiers is strictly based on performance and final league standings.</li>
             </ul>
         </div>
     </div>
 
-    <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div><div id="L1-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div><div id="L2-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe></div></div></div>
+    <div id="PL" class="league-section">
+        <div class="card">
+            <h2>🏆 Premiership</h2>
+            <div class="view-controls">
+                <button class="view-btn" onclick="toggleView('PL', 'table')">Table</button>
+                <button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button>
+            </div>
+            <div id="PL-table" class="sub-view sub-active">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe>
+            </div>
+            <div id="PL-fixtures" class="sub-view">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="CH" class="league-section">
+        <div class="card">
+            <h2>🥈 Championship</h2>
+            <div class="view-controls">
+                <button class="view-btn" onclick="toggleView('CH', 'table')">Table</button>
+                <button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button>
+            </div>
+            <div id="CH-table" class="sub-view sub-active">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe>
+            </div>
+            <div id="CH-fixtures" class="sub-view">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="L1" class="league-section">
+        <div class="card">
+            <h2>🎯 League 1</h2>
+            <div class="view-controls">
+                <button class="view-btn" onclick="toggleView('L1', 'table')">Table</button>
+                <button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button>
+            </div>
+            <div id="L1-table" class="sub-view sub-active">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe>
+            </div>
+            <div id="L1-fixtures" class="sub-view">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="L2" class="league-section">
+        <div class="card">
+            <h2>🎯 League 2</h2>
+            <div class="view-controls">
+                <button class="view-btn" onclick="toggleView('L2', 'table')">Table</button>
+                <button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button>
+            </div>
+            <div id="L2-table" class="sub-view sub-active">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe>
+            </div>
+            <div id="L2-fixtures" class="sub-view">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe>
+            </div>
+        </div>
+    </div>
 
     <div id="SUBMIT" class="league-section">
         <div class="card">
@@ -173,11 +376,12 @@
             <input type="password" id="j_pin" placeholder="Create 4-Digit PIN">
             <select id="j_league">
                 <option value="">-- Select Target League --</option>
-                <option value="Premiership">Premiership (Avg 75+)</option>
-                <option value="Championship">Championship (Avg 60-74)</option>
-                <option value="League 1">League 1 (Avg 45-59)</option>
-                <option value="League 2">League 2 (Avg < 45)</option>
+                <option value="Premiership">Premiership (Avg 55+)</option>
+                <option value="Championship">Championship (Avg 47-55)</option>
+                <option value="League 1">League 1 (Avg 40-47)</option>
+                <option value="League 2">League 2 (Avg 40 & below)</option>
             </select>
+            <p style="font-size: 11px; color: var(--text); margin-top: -5px; padding: 0 5px;">Averages are for placement; tiering is subject to change based on performance.</p>
             <span class="stat-label">Upload Average Proof (Required)</span>
             <input type="file" id="j_screenshot" accept="image/*" multiple>
             <button class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
@@ -188,35 +392,42 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
 
-    function show(id) {
-        document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo(0, 0);
+    function show(id) { 
+        document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active')); 
+        document.getElementById(id).classList.add('active'); 
+        window.scrollTo(0, 0); 
     }
 
-    function toggleView(leagueId, viewType) {
-        document.getElementById(leagueId + '-table').classList.remove('sub-active');
-        document.getElementById(leagueId + '-fixtures').classList.remove('sub-active');
-        document.getElementById(leagueId + '-' + viewType).classList.add('sub-active');
+    function toggleView(leagueId, viewType) { 
+        document.getElementById(leagueId + '-table').classList.remove('sub-active'); 
+        document.getElementById(leagueId + '-fixtures').classList.remove('sub-active'); 
+        document.getElementById(leagueId + '-' + viewType).classList.add('sub-active'); 
     }
 
     async function fetchOpponents() {
-        const p1 = document.getElementById('p1').value;
+        const p1 = document.getElementById('p1').value; 
         const pin = document.getElementById('pin').value;
         if(!p1 || !pin) return alert("Enter Name and PIN");
-        try {
-            const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`);
-            const data = await res.json();
-            const sel = document.getElementById('p2');
-            sel.innerHTML = '<option value="">-- Select Opponent --</option>';
-            data.forEach(o => { let opt = document.createElement('option'); opt.value = opt.innerHTML = o; sel.appendChild(opt); });
-        } catch (e) { alert("Error loading fixtures."); }
+        
+        try { 
+            const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`); 
+            const data = await res.json(); 
+            const sel = document.getElementById('p2'); 
+            sel.innerHTML = '<option value="">-- Select Opponent --</option>'; 
+            data.forEach(o => { 
+                let opt = document.createElement('option'); 
+                opt.value = opt.innerHTML = o; 
+                sel.appendChild(opt); 
+            }); 
+        } catch (e) { 
+            alert("Error loading fixtures."); 
+        }
     }
 
     async function handleSend(mode) {
         const isM = mode === 'MATCH';
         
-        // --- VALIDATION LOGIC ---
+        // Validation Checks
         if (isM) {
             const p1 = document.getElementById('p1').value;
             const pin = document.getElementById('pin').value;
@@ -224,58 +435,61 @@
             const s1 = document.getElementById('s1').value;
             const s2 = document.getElementById('s2').value;
             const fileInput = document.getElementById('screenshot');
+            
             if (!p1 || !pin || !p2 || s1 === "" || s2 === "" || fileInput.files.length === 0) {
-                alert("⚠️ Name, PIN, Opponent, Scores, and Screenshot are mandatory.");
-                return;
+                return alert("⚠️ Please complete all mandatory fields.");
             }
         } else {
             const jName = document.getElementById('j_name').value;
             const jPin = document.getElementById('j_pin').value;
             const jLeague = document.getElementById('j_league').value;
             const jFileInput = document.getElementById('j_screenshot');
+            
             if (!jName || !jPin || !jLeague || jFileInput.files.length === 0) {
-                alert("⚠️ All fields are mandatory to join the club.");
-                return;
+                return alert("⚠️ All application fields are mandatory.");
             }
         }
 
         const fileInput = document.getElementById(isM ? 'screenshot' : 'j_screenshot');
-        const data = {
-            type: isM ? "MATCH" : "JOIN_REQUEST",
-            player1: document.getElementById(isM ? 'p1' : 'j_name').value,
-            pin: document.getElementById(isM ? 'pin' : 'j_pin').value,
-            requested_league: !isM ? document.getElementById('j_league').value : null,
-            score1: isM ? document.getElementById('s1').value : null,
-            score2: isM ? document.getElementById('s2').value : null,
-            player2: isM ? document.getElementById('p2').value : null,
-            p1_180s: isM ? (document.getElementById('p1_180s').value || 0) : 0,
-            p1_hco: isM ? (document.getElementById('p1_hco').value || 0) : 0,
-            images: []
+        const data = { 
+            type: isM ? "MATCH" : "JOIN_REQUEST", 
+            player1: document.getElementById(isM ? 'p1' : 'j_name').value, 
+            pin: document.getElementById(isM ? 'pin' : 'j_pin').value, 
+            requested_league: !isM ? document.getElementById('j_league').value : null, 
+            score1: isM ? document.getElementById('s1').value : null, 
+            score2: isM ? document.getElementById('s2').value : null, 
+            player2: isM ? document.getElementById('p2').value : null, 
+            p1_180s: isM ? (document.getElementById('p1_180s').value || 0) : 0, 
+            p1_hco: isM ? (document.getElementById('p1_hco').value || 0) : 0, 
+            images: [] 
         };
 
-        const btn = event.target;
-        btn.disabled = true;
+        const btn = event.target; 
+        btn.disabled = true; 
         btn.innerHTML = "SENDING...";
 
-        for (let f of fileInput.files) {
-            const b64 = await toBase64(f);
-            data.images.push(b64.split(',')[1]);
+        for (let f of fileInput.files) { 
+            const b64 = await toBase64(f); 
+            data.images.push(b64.split(',')[1]); 
         }
-        
+
         fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) })
         .then(() => { 
-            alert(isM ? "Match Result Submitted!" : "Application Sent Successfully!"); 
+            alert("Submission Successful!"); 
             location.reload(); 
         })
-        .catch(err => {
-            alert("Submission failed.");
-            btn.disabled = false;
-            btn.innerHTML = "RETRY";
+        .catch(err => { 
+            alert("Submission failed."); 
+            btn.disabled = false; 
+            btn.innerHTML = "RETRY"; 
         });
     }
 
-    const toBase64 = f => new Promise((res, rej) => {
-        const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = e => rej(e);
+    const toBase64 = f => new Promise((res, rej) => { 
+        const r = new FileReader(); 
+        r.readAsDataURL(f); 
+        r.onload = () => res(r.result); 
+        r.onerror = e => rej(e); 
     });
 </script>
 </body>
