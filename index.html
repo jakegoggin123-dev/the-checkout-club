@@ -35,6 +35,10 @@
         .rules-list { line-height: 1.6; list-style: none; padding: 0; }
         .rules-list li { margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
         .rules-list li strong { color: var(--gold); }
+        
+        .points-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        .points-table th, .points-table td { border: 1px solid #45a29e; padding: 8px; text-align: center; }
+        .points-table th { background: rgba(69, 162, 158, 0.2); }
     </style>
 </head>
 <body>
@@ -71,9 +75,30 @@
                 <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong>.</li>
                 <li><strong>Video Requirement:</strong> A camera is <strong>strictly required</strong> and must remain on for the duration of the match.</li>
                 <li><strong>Verification:</strong> Both players are responsible for taking a screenshot of the final score.</li>
-                <li><strong>Submissions:</strong> Ensure your screenshot is uploaded via the "Submit Score" page immediately after the game.</li>
-                <li><strong>Fixtures:</strong> 3 fixtures are generated every Monday at 12pm. All weekly games must be played before the next reset.</li>
-                <li><strong>Promotion & Relegation:</strong> At the end of the 8-week season, the bottom 2 players are relegated and the top 2 are promoted.</li>
+                <li><strong>Submissions:</strong> Ensure your score and screenshot is uploaded via the "Submit Score" page immediately after the game.</li>
+                <li><strong>Fixtures:</strong> 3 fixtures are generated every Monday at 12pm. All weekly games must be played before the next reset. (It is not always possible to play all your games in one week for personal or work commitments, if you cannot play all your weekly games please advise an admin, fixtures will be held for a maximum of 2 weeks after the initial publication, if there is no result after this time, the available player will be awarded 7 points).</li>
+                
+                <li><strong>Points System:</strong>
+                    <table class="points-table">
+                        <tr><th>Outcome</th><th>Points Awarded</th></tr>
+                        <tr><td>Win</td><td>3 Points</td></tr>
+                        <tr><td>Draw (if applicable)</td><td>1 Point</td></tr>
+                        <li><em>Points are used to determine league standings and tie-breakers.</em></li>
+                    </table>
+                </li>
+
+                <li><strong>Division Averages:</strong>
+                    <p style="font-size: 13px; margin: 10px 0;">Initial placement is based on your current match average:</p>
+                    <ul style="font-size: 13px;">
+                        <li><strong>Premiership:</strong> 60+ Average</li>
+                        <li><strong>Championship:</strong> 50 - 59.9 Average</li>
+                        <li><strong>League 1:</strong> 40 - 49.9 Average</li>
+                        <li><strong>League 2:</strong> Under 40 Average</li>
+                    </ul>
+                    <p style="background: rgba(255, 204, 0, 0.1); padding: 8px; border-radius: 5px; font-size: 12px; color: var(--gold);">
+                        *Note: These averages are used for <strong>initial league placement only</strong> and will not prevent you from being promoted or relegated at the end of each season based on your performance.
+                    </p>
+                </li>
             </ul>
         </div>
     </div>
