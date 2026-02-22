@@ -13,58 +13,37 @@
         .header-brand { padding: 30px 10px 10px 10px; }
         .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); border: 2px solid var(--gold); }
         
-        /* Nav */
+        /* Navigation */
         nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); color: white; }
         
-        /* Layout */
+        /* Layout Containers */
         .container { max-width: 900px; margin: auto; padding: 20px; box-sizing: border-box; }
         .league-section { display: none; }
         .active { display: block !important; }
         .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; line-height: 1.6; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; }
         
-        /* NEWS SCALE FIX: Keeping this to stop side-scrolling */
-        .news-container { 
-            width: 100%; 
-            height: 500px; 
-            overflow: hidden; 
-            border-radius: 10px; 
-            background: white; 
-            position: relative; 
-        }
-        .news-frame { 
-            width: 200%; 
-            height: 200%; 
-            border: none; 
-            transform: scale(0.5); 
-            transform-origin: 0 0; 
-            position: absolute; 
-            left: 0; 
-            top: 0; 
-        }
-
-        /* Rules */
+        /* List Styling (Used for Rules & News) */
         .rules-list { list-style: none; padding: 0; color: var(--text); }
-        .rules-list li { margin-bottom: 15px; padding-left: 25px; position: relative; }
+        .rules-list li { margin-bottom: 15px; padding-left: 30px; position: relative; word-wrap: break-word; }
         .rules-list li::before { content: '🎯'; position: absolute; left: 0; }
         .rules-list strong { color: var(--gold); }
         .rules-sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; }
 
-        /* Controls & Form Elements */
+        /* League Specific Styles */
         .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
         .view-btn { background: #45a29e; color: white; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
         .sub-view { display: none; }
         .sub-active { display: block !important; }
-        
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         
+        /* Form Styling (Submit Score / Join) */
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #45a29e; background: #0b0c10; color: white; box-sizing: border-box; font-size: 16px; }
         .stat-row { display: flex; gap: 10px; margin-bottom: 5px; }
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
         .warning-msg { display: none; background: rgba(230, 57, 70, 0.2); border: 1px solid var(--red); color: #ffb3b3; padding: 12px; border-radius: 5px; font-size: 13px; margin: 15px 0; font-weight: bold; }
-        
         button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
         @media (max-width: 600px) {
@@ -96,9 +75,9 @@
     <div id="NEWS" class="league-section active">
         <div class="card">
             <h2>📢 Announcements</h2>
-            <div class="news-container">
-                <iframe class="news-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pub?gid=1947364654&single=true&range=A1:A40&widget=false&chrome=false"></iframe>
-            </div>
+            <ul id="news-list" class="rules-list">
+                <li>Loading latest updates...</li>
+            </ul>
         </div>
     </div>
 
@@ -175,6 +154,7 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
 
+    // NAVIGATION
     function show(id) {
         document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
@@ -187,6 +167,32 @@
         document.getElementById(leagueId + '-' + viewType).classList.add('sub-active');
     }
 
+    // DYNAMIC NEWS FETCH (NO IFRAME)
+    async function loadNews() {
+        try {
+            const sheetID = '1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS';
+            const gid = '1947364654';
+            const url = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=${gid}`;
+            
+            const response = await fetch(url);
+            const data = await response.text();
+            
+            const rows = data.split('\n').filter(row => row.trim() !== "");
+            const list = document.getElementById('news-list');
+            list.innerHTML = ''; 
+
+            rows.forEach(row => {
+                const li = document.createElement('li');
+                // Clean CSV quotes and display
+                li.innerHTML = row.replace(/^"(.*)"$/, '$1'); 
+                list.appendChild(li);
+            });
+        } catch (e) {
+            document.getElementById('news-list').innerHTML = "<li>Unable to load news. Check sheet sharing settings.</li>";
+        }
+    }
+
+    // FORM LOGIC
     function checkStats() {
         const val1 = document.getElementById('p1_180s').value;
         const val2 = document.getElementById('p1_hco').value;
@@ -197,7 +203,7 @@
     async function fetchOpponents() {
         const p1 = document.getElementById('p1').value;
         const pin = document.getElementById('pin').value;
-        if(!p1 || !pin) { alert("Enter Name and PIN first"); return; }
+        if(!p1 || !pin) return alert("Enter Name and PIN first");
         try {
             const response = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`);
             const opponents = await response.json();
@@ -236,9 +242,9 @@
 
         try {
             await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            alert("Success! Data sent to the club administrator.");
+            alert("Success! Your score has been logged.");
             location.reload();
-        } catch (e) { alert("Submission failed. Check your internet connection."); }
+        } catch (e) { alert("Submission failed."); }
     }
 
     const toBase64 = file => new Promise((resolve, reject) => {
@@ -247,6 +253,9 @@
         reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
     });
+
+    // Initialize News on Page Load
+    loadNews();
 </script>
 </body>
 </html>
