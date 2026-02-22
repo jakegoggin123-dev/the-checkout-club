@@ -7,13 +7,20 @@
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; }
         body { font-family: sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
+        
+        /* Logo & Branding */
+        .header-brand { padding: 30px 10px 10px 10px; }
+        .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.3); border: 2px solid var(--gold); }
+        
         nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
-        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 6px 10px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; }
+        nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 6px 10px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); color: white; }
+        
         .container { max-width: 900px; margin: auto; padding: 20px; }
         .league-section { display: none; }
         .active { display: block !important; }
-        .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; }
+        .card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #45a29e; margin-bottom: 20px; text-align: left; }
+        .card h2 { text-align: center; color: var(--gold); margin-top: 0; }
         
         .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
         .view-btn { background: #45a29e; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
@@ -24,13 +31,18 @@
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; }
         button.main-submit { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        
+        /* Rules List */
+        .rules-list { line-height: 1.6; }
+        .rules-list li { margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
     </style>
 </head>
 <body>
 
 <nav>
     <a onclick="show('NEWS')">NEWS</a>
-    <a onclick="show('PL')">PREMIERSHlP</a>
+    <a onclick="show('RULES')">RULES</a>
+    <a onclick="show('PL')">PREMIERSHIP</a>
     <a onclick="show('CH')">CHAMPIONSHIP</a>
     <a onclick="show('L1')">LEAGUE 1</a>
     <a onclick="show('L2')">LEAGUE 2</a>
@@ -38,13 +50,31 @@
     <a onclick="show('JOIN')">JOIN CLUB</a>
 </nav>
 
+<div class="header-brand">
+    <img src="1771773124234.png" alt="The Checkout Club Logo" class="logo">
+    <h1 style="color:var(--gold); margin-top: 15px; letter-spacing: 2px;">THE CHECKOUT CLUB</h1>
+</div>
+
 <div class="container">
-    <h1 style="color:var(--gold)">THE CHECKOUT CLUB</h1>
 
     <div id="NEWS" class="league-section active">
         <div class="card">
             <h2>📢 Announcements</h2>
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1947364654&single=true&widget=false&chrome=false"></iframe>
+        </div>
+    </div>
+
+    <div id="RULES" class="league-section">
+        <div class="card">
+            <h2>📜 League Rules</h2>
+            <ul class="rules-list">
+                <li><strong>Format:</strong> All matches are Best of X legs (Fixed format for your league).</li>
+                <li><strong>Fixtures:</strong> 3 fixtures are generated every Monday at 12pm.</li>
+                <li><strong>Completion:</strong> All 3 weekly fixtures must be played before the following Monday.</li>
+                <li><strong>Submissions:</strong> Scores must be submitted via the "Submit Score" page with a screenshot of the DartCounter stats.</li>
+                <li><strong>Promotion/Relegation:</strong> Bottom 2 of each league move down; top 2 move up at the end of the 8-week season.</li>
+                <li><strong>Etiquette:</strong> Players must be respectful. No-shows may result in a walkover (0-X loss).</li>
+            </ul>
         </div>
     </div>
 
@@ -171,20 +201,14 @@
         const select = document.getElementById('p2');
         if(!p1 || !pin) { alert("Enter Name and PIN first"); return; }
         
-        // This scriptURL will be used for both fetching fixtures and sending results
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec';
         const url = `${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`;
         
         try {
             const response = await fetch(url);
             const opponents = await response.json();
             select.innerHTML = '<option value="">-- Select Opponent --</option>';
-            
-            if(opponents.length === 0) { 
-                alert("No pending fixtures found for this name/PIN."); 
-                return; 
-            }
-            
+            if(opponents.length === 0) { alert("No pending fixtures found."); return; }
             opponents.forEach(opp => {
                 let opt = document.createElement('option');
                 opt.value = opt.innerHTML = opp;
