@@ -26,7 +26,9 @@
         .custom-list li { margin-bottom: 15px; padding-left: 30px; position: relative; word-wrap: break-word; }
         .custom-list li::before { content: '🎯'; position: absolute; left: 0; }
         .custom-list strong { color: var(--gold); display: block; margin-bottom: 4px; }
-        
+        .sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; color: #aeb0b1; }
+        .sub-list li::before { content: none; }
+
         /* Tables & Frames */
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         
@@ -35,17 +37,15 @@
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
         button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; }
         
-        .header-brand { padding: 30px 10px 10px 10px; }
-        .logo { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
-
         .view-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
         .view-btn { background: var(--accent); color: white; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
         .sub-view { display: none; }
         .sub-active { display: block !important; }
 
-        @media (max-width: 600px) {
-            nav a { padding: 6px 8px; font-size: 9px; }
-        }
+        .header-brand { padding: 30px 10px 10px 10px; }
+        .logo { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
+
+        @media (max-width: 600px) { nav a { padding: 6px 8px; font-size: 9px; } }
     </style>
 </head>
 <body>
@@ -78,22 +78,45 @@
                 </li>
                 <li>
                     <strong>🗓️ Season 1 Launch: March 1st</strong>
-                    Our inaugural season officially kicks off on March 1st. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible.
+                    Our inaugural season officially kicks off on March 1st. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible. The Checkout Club is ran by the community, any rulings will be dealt with by admins, and any league/format or other play related changes will always go down to a community vote before a change is enacted.
                 </li>
                 <li>
                     <strong>⚙️ How the League Works</strong>
-                    <strong>The Format:</strong> Leagues are split into four tiers: Premiership, Championship, League 1, and League 2. Season lasts 8 weeks.
+                    <strong>The Format:</strong> Leagues are split into four tiers: Premiership, Championship, League 1, and League 2.<br>
+                    <strong>Season Duration:</strong> Each season lasts 8 weeks, followed by a short break for promotions, relegations, and registration of new members.<br>
+                    <strong>Weekly Fixtures:</strong> You will be assigned 3 matches / opponents each week. You have 7 days to complete the three fixtures, we understand that holidays/personal/work commitments may not allow all three games to be played in the week, is this is the case please let an admin know and we can extend as necessary on a case by case basis. If no reasonable request for extension has been made the non available player will be awarded the loss and the available player will be awarded the full 7 points.
+                </li>
+                <li>
+                    <strong>📜 Brief Rules Summary</strong>
+                    <strong>Match Format:</strong> All matches are Best of 7 legs.<br>
+                    <strong>Scoring:</strong> 3 Points for the Match Win. 1 Point for every single leg you win (e.g., a 4-2 win earns the winner 7 points and the loser 2 points).<br>
+                    <strong>Proof:</strong> A screenshot of the final score must be uploaded via the Submit Score page. If you throw a 180 or a High Checkout, please ensure these are visible in the photo or attach a separate screenshot of the result showing these stats.
+                </li>
+                <li>
+                    <strong>🖱️ Using the Site</strong>
+                    <strong>Check Standings:</strong> See the live table and top performers.<br>
+                    <strong>Find Fixtures:</strong> Use the "Find My Fixtures" button on the Submit page to see who you owe a game to.<br>
+                    <strong>Submit Results:</strong> Use your registered Name and 4-digit PIN to log your scores instantly.
                 </li>
             </ul>
+            <p style="text-align: center; color: var(--gold); font-weight: bold; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px;">Let’s toe the oche and make Season 1 a classic! — The Checkout Club Admin</p>
         </div>
     </div>
 
     <div id="RULES" class="league-section">
         <div class="card">
-            <h2>📜 League Rules</h2>
+            <h2>📜 League Rules & Format</h2>
             <ul class="custom-list">
-                <li><strong>Match Format:</strong> Best of 7 legs (First to 4).</li>
-                <li><strong>Points:</strong> 3 for Win, 1 for every leg won.</li>
+                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong> (First to 4). If a player reaches 4 legs, the match ends immediately.</li>
+                <li><strong>Points System:</strong> 
+                    <ul class="sub-list">
+                        <li><strong>3 Points</strong> for the overall Match Win.</li>
+                        <li><strong>1 Point</strong> for every single leg won.</li>
+                    </ul>
+                </li>
+                <li><strong>Season Structure:</strong> Seasons last <strong>8 weeks</strong>. Fixtures are generated weekly. You have a 14-day window to play.</li>
+                <li><strong>Submission:</strong> A screenshot of the final score is mandatory via the Submit Score tab.</li>
+                <li><strong>Stats:</strong> 180s and High Checkouts (100+) must be evidenced via photo to be recorded.</li>
             </ul>
         </div>
     </div>
@@ -203,13 +226,12 @@
             }
         }
         
-        // Use POST to send all data including images
         fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) })
         .then(() => { 
             alert(isM ? "Match Result Submitted!" : "Application Sent Successfully!"); 
             location.reload(); 
         })
-        .catch(err => alert("Submission failed. Check connection."));
+        .catch(err => alert("Submission failed."));
     }
 
     const toBase64 = f => new Promise((res, rej) => {
