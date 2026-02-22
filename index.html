@@ -10,7 +10,7 @@
         
         /* Logo & Branding */
         .header-brand { padding: 30px 10px 10px 10px; }
-        .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.3); border: 2px solid var(--gold); }
+        .logo { width: 180px; height: 180px; border-radius: 50%; box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); border: 2px solid var(--gold); }
         
         nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 6px 10px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
@@ -32,9 +32,9 @@
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; box-sizing: border-box; }
         button.main-submit { background: var(--red); color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         
-        /* Rules List */
-        .rules-list { line-height: 1.6; }
-        .rules-list li { margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        .rules-list { line-height: 1.6; list-style: none; padding: 0; }
+        .rules-list li { margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
+        .rules-list li strong { color: var(--gold); }
     </style>
 </head>
 <body>
@@ -68,12 +68,12 @@
         <div class="card">
             <h2>📜 League Rules</h2>
             <ul class="rules-list">
-                <li><strong>Format:</strong> All matches are Best of X legs (Fixed format for your league).</li>
-                <li><strong>Fixtures:</strong> 3 fixtures are generated every Monday at 12pm.</li>
-                <li><strong>Completion:</strong> All 3 weekly fixtures must be played before the following Monday.</li>
-                <li><strong>Submissions:</strong> Scores must be submitted via the "Submit Score" page with a screenshot of the DartCounter stats.</li>
-                <li><strong>Promotion/Relegation:</strong> Bottom 2 of each league move down; top 2 move up at the end of the 8-week season.</li>
-                <li><strong>Etiquette:</strong> Players must be respectful. No-shows may result in a walkover (0-X loss).</li>
+                <li><strong>Match Format:</strong> All matches are <strong>Best of 7 legs</strong>.</li>
+                <li><strong>Video Requirement:</strong> A camera is <strong>strictly required</strong> and must remain on for the duration of the match.</li>
+                <li><strong>Verification:</strong> Both players are responsible for taking a screenshot of the final score.</li>
+                <li><strong>Submissions:</strong> Ensure your screenshot is uploaded via the "Submit Score" page immediately after the game.</li>
+                <li><strong>Fixtures:</strong> 3 fixtures are generated every Monday at 12pm. All weekly games must be played before the next reset.</li>
+                <li><strong>Promotion & Relegation:</strong> At the end of the 8-week season, the bottom 2 players are relegated and the top 2 are promoted.</li>
             </ul>
         </div>
     </div>
@@ -181,6 +181,8 @@
 </div>
 
 <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec';
+
     function show(id) {
         const sections = document.querySelectorAll('.league-section');
         for (let s of sections) { s.classList.remove('active'); }
@@ -201,14 +203,13 @@
         const select = document.getElementById('p2');
         if(!p1 || !pin) { alert("Enter Name and PIN first"); return; }
         
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec';
         const url = `${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`;
         
         try {
             const response = await fetch(url);
             const opponents = await response.json();
             select.innerHTML = '<option value="">-- Select Opponent --</option>';
-            if(opponents.length === 0) { alert("No pending fixtures found."); return; }
+            if(opponents.length === 0) { alert("No pending fixtures found for this name/PIN."); return; }
             opponents.forEach(opp => {
                 let opt = document.createElement('option');
                 opt.value = opt.innerHTML = opp;
@@ -218,7 +219,6 @@
     }
 
     async function handleSend(mode) {
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz54on5jQzNHkrWqwzuXhxR5t8wByPx8aQpgCTUaye-PK-mFj-qLwutQoWyH32j0JVt/exec';
         const isMatch = mode === 'MATCH';
         const fileInput = document.getElementById(isMatch ? 'screenshot' : 'j_photo');
         const file = fileInput.files[0];
