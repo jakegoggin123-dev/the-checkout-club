@@ -13,12 +13,10 @@
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); }
         .container { max-width: 900px; margin: auto; padding: 20px; box-sizing: border-box; }
-        
         .league-section { display: none; }
         .active { display: block !important; }
         .sub-view { display: none; }
         .sub-active { display: block !important; }
-
         .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 20px; text-align: left; line-height: 1.6; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 1.8rem; }
         .custom-list { list-style: none; padding: 0; color: var(--text); }
@@ -26,19 +24,15 @@
         .custom-list li::before { content: '🎯'; position: absolute; left: 0; }
         .custom-list strong { color: var(--gold); display: block; margin-bottom: 4px; }
         .sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; color: #aeb0b1; }
-        
         .view-controls { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
         .view-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; flex: 1; max-width: 150px; text-align: center; }
         .view-btn:hover { background: var(--accent); }
-
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
-        
         button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; }
         .spinner { width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
         #pwa-toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--card); border: 2px solid var(--gold); padding: 15px; border-radius: 10px; display: none; z-index: 2000; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .logo { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); margin-bottom: 20px;}
         #statusResult { margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--gold); color: var(--gold); font-weight: bold; display: none; text-align: center; }
@@ -69,38 +63,37 @@
 </div>
 
 <div class="container">
-    
     <div id="NEWS" class="league-section active">
         <div class="card">
             <h2>📢 Latest Announcements</h2>
             <ul class="custom-list">
-                <li>
-                    <strong>🎯 Welcome to The Checkout Club | Season 1</strong>
+               <li>
+                   <strong>🎯 Welcome to The Checkout Club | Season 1</strong>
                     We are thrilled to officially launch The Checkout Club, a brand-new competitive darts community designed for players of all levels to test their mettle in a structured league format.
-                </li>
-                <li>
-                    <strong>🗓️ Season 1 Launch: March 9th</strong>
-                    Our inaugural season officially kicks off on March 9th. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible. The Checkout Club is ran by the community, any rulings will be dealt with by admins, and any league/format or other play related changes will always go down to a community vote before a change is enacted.
-                </li>
-                <li>
-                    <strong>⚙️ How the League Works</strong>
-                    <strong>The Format:</strong> Leagues are split into four tiers based on initial average placement:
-                    <ul class="sub-list" style="margin: 10px 0;">
-                        <li>Premiership: Avg 55+</li>
-                        <li>Championship: Avg 47-55</li>
-                        <li>League 1: Avg 40-47</li>
-                        <li>League 2: Avg 40 and below</li>
-                    </ul>
-                    <strong>Season Duration:</strong> Each season lasts 8 weeks, followed by a short break for promotions, relegations, and registration of new members. Initial averages are only for league placement; you may be relegated or promoted into other divisions based on your end-of-season performance.
-                    <br><br>
-                    <strong>Weekly Fixtures:</strong> You will be assigned 3 matches / opponents each week. You have 7 days to complete the three fixtures, we understand that holidays/personal/work commitments may not allow all three games to be played in the week, is this is the case please let an admin know and we can extend as necessary on a case by case basis. If no reasonable request for extension has been made the non available player will be awarded the loss and the available player will be awarded the full 7 points.
-                </li>
-                <li>
-                    <strong>📜 Brief Rules Summary</strong>
-                    <strong>Match Format:</strong> All matches are Best of 7 legs.<br>
-                    <strong>Scoring:</strong> 3 Points for the Match Win. 1 Point for every single leg you win (e.g., a 4-2 win earns the winner 7 points and the loser 2 points).<br>
-                    <strong>Proof:</strong> A screenshot of the final score must be uploaded via the Submit Score page. If you throw a 180 or a High Checkout, please ensure these are visible in the photo or attach a separate screenshot of the result showing these stats.
-                </li>
+               </li>
+               <li>
+                   <strong>🗓️ Season 1 Launch: March 9th</strong>
+                   Our inaugural season officially kicks off on March 9th. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible. The Checkout Club is ran by the community, any rulings will be dealt with by admins, and any league/format or other play related changes will always go down to a community vote before a change is enacted.
+               </li>
+               <li>
+                   <strong>⚙️ How the League Works</strong>
+                   <strong>The Format:</strong> Leagues are split into four tiers based on initial average placement:
+                   <ul class="sub-list" style="margin: 10px 0;">
+                       <li>Premiership: Avg 55+</li>
+                       <li>Championship: Avg 47-55</li>
+                       <li>League 1: Avg 40-47</li>
+                       <li>League 2: Avg 40 and below</li>
+                   </ul>
+                   <strong>Season Duration:</strong> Each season lasts 8 weeks, followed by a short break for promotions, relegations, and registration of new members. Initial averages are only for league placement; you may be relegated or promoted into other divisions based on your end-of-season performance.
+                   <br><br>
+                   <strong>Weekly Fixtures:</strong> You will be assigned 3 matches / opponents each week. You have 7 days to complete the three fixtures, we understand that holidays/personal/work commitments may not allow all three games to be played in the week, is this is the case please let an admin know and we can extend as necessary on a case by case basis. If no reasonable request for extension has been made the non available player will be awarded the loss and the available player will be awarded the full 7 points.
+               </li>
+               <li>
+                   <strong>📜 Brief Rules Summary</strong>
+                   <strong>Match Format:</strong> All matches are Best of 7 legs.<br>
+                   <strong>Scoring:</strong> 3 Points for the Match Win. 1 Point for every single leg you win (e.g., a 4-2 win earns the winner 7 points and the loser 2 points).<br>
+                   <strong>Proof:</strong> A screenshot of the final score must be uploaded via the Submit Score page. If you throw a 180 or a High Checkout, please ensure these are visible in the photo or attach a separate screenshot of the result showing these stats.
+               </li>
             </ul>
             <p style="text-align: center; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: bold; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px;">Let’s toe the oche and make Season 1 a classic! — The Checkout Club Admins</p>
         </div>
@@ -110,31 +103,31 @@
         <div class="card">
             <h2>📜 League Rules & Format</h2>
             <ul class="custom-list">
-                <li><strong>Match Format:</strong> Best of 7 legs (First to 4).</li>
-                <li><strong>Points System:</strong> 3 Points for a Match Win; 1 Point for every leg won.</li>
-                <li><strong>Season Structure:</strong>
-                    <ul class="sub-list">
-                        <li>Each season lasts 8 weeks.</li>
-                        <li>Players receive 3 fixtures per week (Autogenerated every Monday at 12pm).</li>
-                        <li>Fixtures must be completed within 7 days.</li>
-                    </ul>
-                </li>
-                <li><strong>Division Averages (Initial Placement only):</strong>
-                    <ul class="sub-list">
-                        <li><strong>Premiership:</strong> 55+</li>
-                        <li><strong>Championship:</strong> 47-55</li>
-                        <li><strong>League 1:</strong> 40-47</li>
-                        <li><strong>League 2:</strong> 40 & Below</li>
-                    </ul>
-                </li>
-                <li><strong>Promotion & Relegation:</strong> Movement between tiers is strictly based on performance and final league standings.</li>
-                <li><strong>Score Submission & Stats:</strong>
-                    <ul class="sub-list">
-                        <li><strong>Both Players</strong> must submit their scores via the 'Submit Score' tab to ensure verification.</li>
-                        <li><strong>A Screenshot</strong> of the final match result is mandatory for every submission.</li>
-                        <li><strong>Any 180s</strong> or <strong>High Checkouts (100+)</strong> must be entered in the submission and clearly visible in the attached proof to be officially recorded.</li>
-                    </ul>
-                </li>
+               <li><strong>Match Format:</strong> Best of 7 legs (First to 4).</li>
+               <li><strong>Points System:</strong> 3 Points for a Match Win; 1 Point for every leg won.</li>
+               <li><strong>Season Structure:</strong>
+                   <ul class="sub-list">
+                       <li>Each season lasts 8 weeks.</li>
+                       <li>Players receive 3 fixtures per week (Autogenerated every Monday at 12pm).</li>
+                       <li>Fixtures must be completed within 7 days.</li>
+                   </ul>
+               </li>
+               <li><strong>Division Averages (Initial Placement only):</strong>
+                   <ul class="sub-list">
+                       <li><strong>Premiership:</strong> 55+</li>
+                       <li><strong>Championship:</strong> 47-55</li>
+                       <li><strong>League 1:</strong> 40-47</li>
+                       <li><strong>League 2:</strong> 40 & Below</li>
+                   </ul>
+               </li>
+               <li><strong>Promotion & Relegation:</strong> Movement between tiers is strictly based on performance and final league standings.</li>
+               <li><strong>Score Submission & Stats:</strong>
+                   <ul class="sub-list">
+                       <li><strong>Both Players</strong> must submit their scores via the 'Submit Score' tab to ensure verification.</li>
+                       <li><strong>A Screenshot</strong> of the final match result is mandatory for every submission.</li>
+                       <li><strong>Any 180s</strong> or <strong>High Checkouts (100+)</strong> must be entered in the submission and clearly visible in the attached proof to be officially recorded.</li>
+                   </ul>
+               </li>
             </ul>
         </div>
     </div>
@@ -152,20 +145,20 @@
             <button type="button" onclick="fetchOpponents()" style="background:var(--accent); color:white; border:none; padding:12px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold; cursor:pointer;">FIND MY FIXTURES</button>
             <select id="p2"><option value="">-- Select Opponent --</option></select>
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1"></div>
-                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2"></div>
-            </div>
+               <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1"></div>
+               <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2"></div>
+           </div>
             <span class="stat-label">Personal Stats (Optional)</span>
             <div style="display:flex; gap:10px;">
-                <input type="number" id="p1_180s" placeholder="180s?">
-                <input type="number" id="p1_hco" placeholder="High CO">
-            </div>
+               <input type="number" id="p1_180s" placeholder="180s?">
+               <input type="number" id="p1_hco" placeholder="High CO">
+           </div>
             <span class="stat-label">Attach Proof (Required)</span>
             <input type="file" id="screenshot" accept="image/*" multiple>
             <button id="matchSubmitBtn" class="main-submit" onclick="handleSend('MATCH')">
-                <div id="match-spinner" class="spinner"></div>
-                <span>SUBMIT OFFICIAL RESULT</span>
-            </button>
+               <div id="match-spinner" class="spinner"></div>
+               <span>SUBMIT OFFICIAL RESULT</span>
+           </button>
         </div>
     </div>
 
@@ -176,19 +169,19 @@
             <input type="email" id="j_email" placeholder="Email Address (Mandatory)">
             <input type="password" id="j_pin" placeholder="Create 4-Digit PIN">
             <select id="j_league">
-                <option value="">-- Select Target League --</option>
-                <option value="Premiership">Premiership (Avg 55+)</option>
-                <option value="Championship">Championship (Avg 47-55)</option>
-                <option value="League 1">League 1 (Avg 40-47)</option>
-                <option value="League 2">League 2 (Avg 40 & below)</option>
-            </select>
+               <option value="">-- Select Target League --</option>
+               <option value="Premiership">Premiership (Avg 55+)</option>
+               <option value="Championship">Championship (Avg 47-55)</option>
+               <option value="League 1">League 1 (Avg 40-47)</option>
+               <option value="League 2">League 2 (Avg 40 & below)</option>
+           </select>
             <p style="font-size: 11px; color: var(--text); margin-top: -5px; padding: 0 5px;">Averages are for placement; tiering is subject to change based on performance.</p>
             <span class="stat-label">Upload Average Proof (Required)</span>
             <input type="file" id="j_screenshot" accept="image/*" multiple>
             <button id="joinSubmitBtn" class="main-submit" onclick="handleSend('JOIN')">
-                <div id="join-spinner" class="spinner"></div>
-                <span>SEND APPLICATION</span>
-            </button>
+               <div id="join-spinner" class="spinner"></div>
+               <span>SEND APPLICATION</span>
+           </button>
             
             <hr style="margin: 30px 0; border: 0; border-top: 1px solid #444;">
             <h2>🔍 Check Application Status</h2>
@@ -209,28 +202,28 @@
     function hideToast() { document.getElementById('pwa-toast').style.display = 'none'; }
 
     function show(id) { 
-        document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active')); 
+       document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active')); 
         const target = document.getElementById(id);
-        target.classList.add('active'); 
+       target.classList.add('active'); 
         const firstTable = target.querySelector('.sub-view');
         if(firstTable) toggleView(id, 'table');
-        window.scrollTo(0, 0); 
+       window.scrollTo(0, 0); 
     }
 
     function toggleView(leagueId, viewType) { 
-        document.getElementById(leagueId + '-table').classList.remove('sub-active'); 
-        document.getElementById(leagueId + '-fixtures').classList.remove('sub-active'); 
-        document.getElementById(leagueId + '-' + viewType).classList.add('sub-active'); 
+       document.getElementById(leagueId + '-table').classList.remove('sub-active'); 
+       document.getElementById(leagueId + '-fixtures').classList.remove('sub-active'); 
+       document.getElementById(leagueId + '-' + viewType).classList.add('sub-active'); 
     }
     
     async function checkStatus() {
         const n = document.getElementById('c_name').value, p = document.getElementById('c_pin').value, resDiv = document.getElementById('statusResult');
         if(!n || !p) return alert("Enter Name and PIN");
-        resDiv.style.display = "block"; resDiv.innerHTML = "Searching...";
+       resDiv.style.display = "block"; resDiv.innerHTML = "Searching...";
         try {
             const r = await fetch(`${scriptURL}?action=checkStatus&name=${encodeURIComponent(n)}&pin=${p}`);
             const d = await r.json();
-            resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
+           resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
         } catch (e) { resDiv.innerHTML = "Error."; }
     }
 
@@ -256,34 +249,48 @@
 
         btn.disabled = true; spinner.style.display = "block";
         const originalText = btn.querySelector('span').innerText;
-        btn.querySelector('span').innerText = "SENDING...";
+       btn.querySelector('span').innerText = "SENDING...";
 
-        const data = { 
+        const data = {
             type: isM ? "MATCH" : "JOIN_REQUEST", 
             player1: document.getElementById(isM ? 'p1' : 'j_name').value, 
             pin: document.getElementById(isM ? 'pin' : 'j_pin').value, 
             email: isM ? null : document.getElementById('j_email').value,
-            requested_league: !isM ? document.getElementById('j_league').value : null, 
+           requested_league: !isM ? document.getElementById('j_league').value : null, 
             score1: isM ? document.getElementById('s1').value : null, 
             score2: isM ? document.getElementById('s2').value : null, 
             player2: isM ? document.getElementById('p2').value : null, 
             p1_180s: isM ? (document.getElementById('p1_180s').value || 0) : 0, 
             p1_hco: isM ? (document.getElementById('p1_hco').value || 0) : 0, 
-            images: [] 
+            images: []
         };
 
         try {
             for (let f of fileInput.files) { const b64 = await toBase64(f); data.images.push(b64.split(',')[1]); }
-            await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
             
-            if (isM) { 
+            // --- UPDATED RESPONSE HANDLING ---
+            const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
+            const resultText = await response.text();
+
+            if (resultText === "DUPLICATE_APPLICATION") {
+                alert("⚠️ It looks like you have already submitted an application. Please wait for an admin to review it and check your Junk folder.");
+            } else if (resultText === "ALREADY_MEMBER") {
+                alert("⚠️ You are already a registered member of The Checkout Club!");
+            } else if (isM) { 
                 alert("Match Result Submitted Successfully!"); 
+                location.reload();
             } else { 
                 alert("Application Sent!\n\nPlease check your email for confirmation. Once reviewed, you will receive a Welcome Email with your next steps.\n\nIMPORTANT: Please check your Junk/Spam folder as it may be delivered there."); 
+                location.reload();
             }
-            
-            location.reload();
-        } catch (err) { alert("Error sending."); btn.disabled = false; spinner.style.display = "none"; btn.querySelector('span').innerText = originalText; }
+            // --- END UPDATED RESPONSE HANDLING ---
+
+        } catch (err) { 
+            alert("Error sending. Check connection."); 
+            btn.disabled = false;
+            spinner.style.display = "none"; 
+            btn.querySelector('span').innerText = originalText; 
+        }
     }
 
     const toBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = e => rej(e); });
