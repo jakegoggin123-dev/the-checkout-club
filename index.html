@@ -268,9 +268,13 @@
         try {
             for (let f of fileInput.files) { const b64 = await toBase64(f); data.images.push(b64.split(',')[1]); }
             
-            // --- UPDATED RESPONSE HANDLING ---
             const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             const resultText = await response.text();
+
+            // STOP SPINNER & RESET BUTTON IMMEDIATELY AFTER RESPONSE
+            btn.disabled = false;
+            spinner.style.display = "none";
+            btn.querySelector('span').innerText = originalText;
 
             if (resultText === "DUPLICATE_APPLICATION") {
                 alert("⚠️ It looks like you have already submitted an application. Please wait for an admin to review it and check your Junk folder.");
@@ -283,7 +287,6 @@
                 alert("Application Sent!\n\nPlease check your email for confirmation. Once reviewed, you will receive a Welcome Email with your next steps.\n\nIMPORTANT: Please check your Junk/Spam folder as it may be delivered there."); 
                 location.reload();
             }
-            // --- END UPDATED RESPONSE HANDLING ---
 
         } catch (err) { 
             alert("Error sending. Check connection."); 
