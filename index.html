@@ -21,7 +21,6 @@
         .custom-list li { margin-bottom: 15px; padding-left: 30px; position: relative; word-wrap: break-word; }
         .custom-list li::before { content: '🎯'; position: absolute; left: 0; }
         .custom-list strong { color: var(--gold); display: block; margin-bottom: 4px; }
-        .sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; color: #aeb0b1; }
         iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
@@ -59,41 +58,42 @@
             <h2>📢 Latest Announcements</h2>
             <ul class="custom-list">
                 <li>
-                    <strong>🎯 Welcome to The Checkout Club | Season 1</strong>
-                    Competitive darts community designed for all levels.
+                    <strong>🎯 Welcome to Season 1</strong>
+                    The Checkout Club is officially live! We are excited to bring a competitive and fair environment for all dart enthusiasts.
                 </li>
                 <li>
-                    <strong>🗓️ Season 1 Launch: March 1st</strong>
-                    Fixtures for Week 1 will be visible on the website under your league tabs.
+                    <strong>🗓️ Week 1 Fixtures</strong>
+                    Fixtures for the opening week are now live. Please check your respective league tabs and arrange your matches via the WhatsApp group.
                 </li>
                 <li>
-                    <strong>⚙️ How the League Works</strong>
-                    Matches are Best of 7 legs. 3 matches per week. 7 days to complete.
+                    <strong>⚙️ Technical Updates</strong>
+                    We have launched our new submission system to ensure all stats (180s and High Checkouts) are tracked accurately.
                 </li>
             </ul>
-            <p style="text-align: center; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: bold; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px;">Toe the oche! — The Checkout Club Admins</p>
         </div>
     </div>
 
     <div id="RULES" class="league-section">
         <div class="card">
-            <h2>📜 League Rules & Format</h2>
+            <h2>📜 League Rules</h2>
             <ul class="custom-list">
-                <li><strong>Match Format:</strong> Matches are Best of 7 legs (First to 4). If a match finishes 4-0, 4-1, 4-2, or 4-3, the result stands.</li>
-                <li><strong>Points System:</strong>
-                    <ul class="sub-list">
-                        <li>3 Points for a Match Win.</li>
-                        <li>1 Point for every individual leg won.</li>
-                        <li>(e.g., A 4-2 win earns you 7 points total; the loser earns 2 points).</li>
-                    </ul>
+                <li>
+                    <strong>Match Format</strong>
+                    Matches are played as a Best of 7 legs. The first player to reach 4 legs wins the match.
                 </li>
-                <li><strong>Submission:</strong> The winner must submit the score with photo proof within 24 hours.</li>
+                <li>
+                    <strong>Points System</strong>
+                    Players earn 3 points for a win and 1 point for every leg won during the match. For example, a 4-2 victory results in 7 points for the winner and 2 points for the loser.
+                </li>
+                <li>
+                    <strong>Reporting Scores</strong>
+                    The winner must submit the match score along with a photo of the final board or score sheet for verification.
+                </li>
             </ul>
         </div>
     </div>
 
     <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    
     <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
     <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div><div id="L1-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe></div></div></div>
     <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div><div id="L2-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe></div></div></div>
@@ -106,17 +106,17 @@
             <button type="button" onclick="fetchOpponents()" style="background:var(--accent); color:white; border:none; padding:12px; border-radius:5px; width:100%; margin-bottom:10px; font-weight:bold; cursor:pointer;">FIND MY FIXTURES</button>
             <select id="p2"><option value="">-- Select Opponent --</option></select>
             <div style="display:flex; gap:10px;">
-                <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1"></div>
-                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2"></div>
+                <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1" min="0" max="4"></div>
+                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2" min="0" max="4"></div>
             </div>
             <span class="stat-label">Personal Stats</span>
             <div style="display:flex; gap:10px;">
-                <input type="number" id="p1_180s" placeholder="180s?">
-                <input type="number" id="p1_hco" placeholder="High CO">
+                <input type="number" id="p1_180s" placeholder="180s (Count)">
+                <input type="number" id="p1_hco" placeholder="Highest CO">
             </div>
-            <span class="stat-label">Attach Proof (Required)</span>
+            <span class="stat-label">Attach Photo Proof</span>
             <input type="file" id="screenshot" accept="image/*" multiple>
-            <button id="matchBtn" class="main-submit" onclick="handleSend('MATCH')">SUBMIT OFFICIAL RESULT</button>
+            <button id="matchSubmitBtn" class="main-submit" onclick="handleSend('MATCH')">SUBMIT OFFICIAL RESULT</button>
         </div>
     </div>
 
@@ -133,9 +133,10 @@
                 <option value="League 1">League 1 (Avg 40-47)</option>
                 <option value="League 2">League 2 (Avg 40 & below)</option>
             </select>
+            <span class="stat-label">Upload Average Proof</span>
             <input type="file" id="j_screenshot" accept="image/*" multiple>
-            <button id="joinBtn" class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
-            <hr style="margin:20px 0; border:0; border-top:1px solid #444;">
+            <button id="joinSubmitBtn" class="main-submit" onclick="handleSend('JOIN')">SEND APPLICATION</button>
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #444;">
             <h2>🔍 Status Check</h2>
             <input type="text" id="c_name" placeholder="Name">
             <input type="password" id="c_pin" placeholder="PIN">
@@ -176,7 +177,7 @@
     }
 
     async function handleSend(mode) {
-        const isM = mode === 'MATCH', fileInput = document.getElementById(isM ? 'screenshot' : 'j_screenshot'), btn = document.getElementById(isM ? 'matchBtn' : 'joinBtn'); 
+        const isM = mode === 'MATCH', fileInput = document.getElementById(isM ? 'screenshot' : 'j_screenshot'), btn = document.getElementById(isM ? 'matchSubmitBtn' : 'joinSubmitBtn'); 
         if (fileInput.files.length === 0) return alert("⚠️ Attach proof.");
         btn.disabled = true; btn.innerHTML = "SENDING...";
         const data = { 
