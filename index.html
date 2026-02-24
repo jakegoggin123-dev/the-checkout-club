@@ -71,8 +71,8 @@
                     We are thrilled to officially launch The Checkout Club, a brand-new competitive darts community designed for players of all levels to test their mettle in a structured league format.
                 </li>
                 <li>
-                    <strong>🗓️ Season 1 Launch: March 9th</strong>
-                    Our inaugural season officially kicks off on March 9th. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible. The Checkout Club is ran by the community, any rulings will be dealt with by admins, and any league/format or other play related changes will always go down to a community vote before a change is enacted.
+                    <strong>🗓️ Season 1 Launch: March 1st</strong>
+                    Our inaugural season officially kicks off on March 1st. All fixtures for Week 1 will be generated and visible on the website under your respective league tabs. We have re-branded and launched this new website, so please bear with us during season 1 as we aim to fix any early bugs, and please report anything that isnt working and we will get it fixed as soon as possible. The Checkout Club is ran by the community, any rulings will be dealt with by admins, and any league/format or other play related changes will always go down to a community vote before a change is enacted.
                 </li>
                 <li>
                     <strong>⚙️ How the League Works</strong>
@@ -94,7 +94,6 @@
                     <strong>Proof:</strong> A screenshot of the final score must be uploaded via the Submit Score page. If you throw a 180 or a High Checkout, please ensure these are visible in the photo or attach a separate screenshot of the result showing these stats.
                 </li>
             </ul>
-            <p style="text-align: center; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: bold; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px;">Let’s toe the oche and make Season 1 a classic! — The Checkout Club Admins</p>
         </div>
     </div>
 
@@ -206,17 +205,29 @@
     <div id="JOIN" class="league-section">
         <div class="card">
             <h2>📝 Join The Club</h2>
-            <input type="text" id="j_name" placeholder="Full Name">
-            <input type="email" id="j_email" placeholder="Email Address">
-            <input type="password" id="j_pin" placeholder="Create 4-Digit PIN">
+            <p style="color:var(--text); font-size: 0.9rem; margin-top: -10px; margin-bottom: 20px;">Complete all fields below. Our admins will review your application and email you once approved.</p>
+            
+            <span class="stat-label">Full Name</span>
+            <input type="text" id="j_name" placeholder="e.g. Luke Littler">
+            
+            <span class="stat-label">Email Address (Mandatory)</span>
+            <input type="email" id="j_email" placeholder="e.g. luke@darts.com">
+            
+            <span class="stat-label">Create a 4-Digit PIN (For Scoring)</span>
+            <input type="password" id="j_pin" placeholder="Enter 4 numbers">
+            
+            <span class="stat-label">Target League (Based on Avg)</span>
             <select id="j_league">
                 <option value="">-- Select Target League --</option>
-                <option value="Premiership">Premiership</option>
-                <option value="Championship">Championship</option>
-                <option value="League 1">League 1</option>
-                <option value="League 2">League 2</option>
+                <option value="Premiership">Premiership (Avg 55+)</option>
+                <option value="Championship">Championship (Avg 47-55)</option>
+                <option value="League 1">League 1 (Avg 40-47)</option>
+                <option value="League 2">League 2 (Avg 40 & Below)</option>
             </select>
+            
+            <span class="stat-label">Upload Average/Proof Screenshot</span>
             <input type="file" id="j_screenshot" accept="image/*" multiple>
+            
             <button id="joinSubmitBtn" class="main-submit" onclick="handleSend('JOIN')">
                 <div id="join-spinner" class="spinner"></div><span>SEND APPLICATION</span>
             </button>
@@ -231,11 +242,8 @@
         document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active')); 
         const target = document.getElementById(id);
         target.classList.add('active'); 
-        
-        // Reset to Table view when switching to a league
         const firstTable = target.querySelector('.sub-view');
         if(firstTable) toggleView(id, 'table');
-        
         window.scrollTo(0, 0); 
     }
 
@@ -260,7 +268,7 @@
         if (isM) {
             if (!document.getElementById('p1').value || !document.getElementById('pin').value || !document.getElementById('p2').value || document.getElementById('s1').value === "" || fileInput.files.length === 0) return alert("Please complete all fields.");
         } else {
-            if (!document.getElementById('j_name').value || !document.getElementById('j_email').value || !document.getElementById('j_pin').value || !document.getElementById('j_league').value || fileInput.files.length === 0) return alert("All fields are mandatory.");
+            if (!document.getElementById('j_name').value || !document.getElementById('j_email').value || !document.getElementById('j_pin').value || !document.getElementById('j_league').value || fileInput.files.length === 0) return alert("All fields including email and proof are mandatory.");
         }
 
         btn.disabled = true; spinner.style.display = "block";
@@ -282,7 +290,7 @@
         try {
             for (let f of fileInput.files) { const b64 = await toBase64(f); data.images.push(b64.split(',')[1]); }
             await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            alert(isM ? "Match Result Submitted!" : "Application Sent!");
+            alert(isM ? "Match Result Submitted!" : "Application Sent! Please check your email for confirmation.");
             location.reload();
         } catch (err) { alert("Error sending."); btn.disabled = false; spinner.style.display = "none"; }
     }
