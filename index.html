@@ -28,7 +28,6 @@
         .view-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; flex: 1; max-width: 150px; text-align: center; }
         .view-btn:hover { background: var(--accent); }
         
-        /* NEW TABLE STYLE FOR DATA FEED */
         .table-scroll { overflow-x: auto; width: 100%; border-radius: 8px; margin-top: 10px; }
         table { width: 100%; border-collapse: collapse; background: #121212; color: white; font-size: 13px; }
         th { background: var(--red); color: white; padding: 12px 8px; text-align: left; white-space: nowrap; }
@@ -210,7 +209,7 @@
 
     function show(id) { 
        document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active')); 
-        const target = document.getElementById(id);
+       const target = document.getElementById(id);
        target.classList.add('active'); 
        if(['PL','CH','L1','L2'].includes(id)) toggleView(id, 'table');
        window.scrollTo(0, 0); 
@@ -229,30 +228,37 @@
 
        try {
            const res = await fetch(`${scriptURL}?action=${action}&league=${encodeURIComponent(leagueNames[leagueId])}`);
+           if (!res.ok) throw new Error('Network error');
            const fullData = await res.json();
-           const data = fullData.filter(row => row[0] && row[0].toString().trim() !== "");
+           
+           const data = fullData.filter(row => row && row[0] && row[0].toString().trim() !== "");
 
-           if(data.length < 1) {
-               container.innerHTML = "<p style='text-align:center;'>No fixtures yet.</p>";
+           if(!data || data.length < 1) {
+               container.innerHTML = "<p style='text-align:center;'>No data found.</p>";
                return;
            }
 
            let html = '<table><thead><tr>';
-           data[0].slice(0, viewType === 'fixtures' ? 7 : 8).forEach(h => html += `<th>${h}</th>`);
+           const colLimit = viewType === 'table' ? 8 : 7;
+           data[0].slice(0, colLimit).forEach(h => html += `<th>${h}</th>`);
            html += '</tr></thead><tbody>';
 
            data.slice(1).forEach(row => {
                html += '<tr>';
-               row.slice(0, viewType === 'fixtures' ? 7 : 8).forEach((cell, idx) => {
-                   let displayValue = cell;
-                   if(viewType === 'fixtures' && idx === 4 && row[4] === "" && row[5] === "") displayValue = "<span class='status-pending'>PENDING</span>";
-                   html += `<td>${displayValue}</td>`;
-               });
+               for(let i=0; i < colLimit; i++) {
+                   let cell = row[i] !== undefined ? row[i] : "";
+                   if(viewType === 'fixtures' && i === 4 && (!row[4] && !row[5])) {
+                       cell = "<span class='status-pending'>PENDING</span>";
+                   }
+                   html += `<td>${cell}</td>`;
+               }
                html += '</tr>';
            });
            html += '</tbody></table>';
            container.innerHTML = html;
-       } catch (e) { container.innerHTML = "Error loading data."; }
+       } catch (e) { 
+           container.innerHTML = "<div style='color:var(--red); padding:20px;'>Error: " + e.message + ". Check Google Script for 'getStandings' action.</div>"; 
+       }
     }
     
     async function checkStatus() {
