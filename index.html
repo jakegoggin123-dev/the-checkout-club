@@ -8,22 +8,30 @@
     <style>
         :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; --accent: #45a29e; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; overflow-x: hidden; }
+        
         .header-brand h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--gold); margin-top: 15px; letter-spacing: 2px; text-transform: uppercase; text-shadow: 3px 3px 0px rgba(0,0,0,0.8); }
+        
         nav { background: var(--card); padding: 15px; border-bottom: 3px solid var(--red); position: sticky; top: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; z-index: 1000; }
         nav a { color: white; text-decoration: none; font-weight: bold; cursor: pointer; padding: 8px 12px; font-size: 11px; border-radius: 4px; background: rgba(255,255,255,0.05); text-transform: uppercase; transition: 0.3s; }
         nav a:hover { background: var(--red); }
+
         .container { max-width: 900px; margin: auto; padding: 20px; box-sizing: border-box; }
         .league-section { display: none; }
         .active { display: block !important; }
+        
         .sub-view { display: none; }
         .sub-active { display: block !important; }
+        
         .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 20px; text-align: left; line-height: 1.6; }
         .card h2 { text-align: center; color: var(--gold); margin-top: 0; border-bottom: 1px solid rgba(255,204,0,0.2); padding-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+        
         .custom-list { list-style: none; padding: 0; color: var(--text); }
         .custom-list li { margin-bottom: 15px; padding-left: 30px; position: relative; word-wrap: break-word; }
         .custom-list li::before { content: '🎯'; position: absolute; left: 0; }
         .custom-list strong { color: var(--gold); display: block; margin-bottom: 4px; }
+        
         .sub-list { list-style: circle; margin-top: 5px; padding-left: 20px; color: #aeb0b1; }
+        
         .view-controls { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
         .view-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; flex: 1; max-width: 150px; text-align: center; }
         .view-btn:hover { background: var(--accent); }
@@ -32,16 +40,21 @@
         table { width: 100%; border-collapse: collapse; background: #121212; color: white; font-size: 13px; }
         th { background: var(--red); color: white; padding: 12px 8px; text-align: left; white-space: nowrap; }
         td { border-bottom: 1px solid #333; padding: 12px 8px; white-space: nowrap; }
+        
         .status-pending { color: var(--gold); font-weight: bold; }
-
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
+        
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
+        
         button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        
         .spinner { width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
         #pwa-toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--card); border: 2px solid var(--gold); padding: 15px; border-radius: 10px; display: none; z-index: 2000; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .logo { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); margin-bottom: 20px;}
         #statusResult { margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--gold); color: var(--gold); font-weight: bold; display: none; text-align: center; }
+        
         @media (max-width: 600px) { nav a { padding: 6px 8px; font-size: 9px; } .header-brand h1 { font-size: 2.2rem; } }
     </style>
 </head>
@@ -75,7 +88,7 @@
             <ul class="custom-list">
                <li>
                    <strong>🎯 Welcome to The Checkout Club | Season 1</strong>
-                    We are thrilled to officially launch The Checkout Club, a brand-new competitive darts community designed for players of all levels to test their mettle in a structured league format.
+                   We are thrilled to officially launch The Checkout Club, a brand-new competitive darts community designed for players of all levels to test their mettle in a structured league format.
                </li>
                <li>
                    <strong>🗓️ Season 1 Launch: March 9th</strong>
@@ -153,18 +166,18 @@
             <div style="display:flex; gap:10px;">
                <div style="flex:1"><span class="stat-label">Your Legs</span><input type="number" id="s1"></div>
                <div style="flex:1"><span class="stat-label">Opponent Legs</span><input type="number" id="s2"></div>
-           </div>
+            </div>
             <span class="stat-label">Personal Stats (Optional)</span>
             <div style="display:flex; gap:10px;">
                <input type="number" id="p1_180s" placeholder="180s?">
                <input type="number" id="p1_hco" placeholder="High CO">
-           </div>
+            </div>
             <span class="stat-label">Attach Proof (Required)</span>
             <input type="file" id="screenshot" accept="image/*" multiple>
             <button id="matchSubmitBtn" class="main-submit" onclick="handleSend('MATCH')">
                <div id="match-spinner" class="spinner"></div>
                <span>SUBMIT OFFICIAL RESULT</span>
-           </button>
+            </button>
         </div>
     </div>
 
@@ -180,14 +193,13 @@
                <option value="Championship">Championship (Avg 47-55)</option>
                <option value="League 1">League 1 (Avg 40-47)</option>
                <option value="League 2">League 2 (Avg 40 & below)</option>
-           </select>
-            <p style="font-size: 11px; color: var(--text); margin-top: -5px; padding: 0 5px;">Averages are for placement; tiering is subject to change based on performance.</p>
+            </select>
             <span class="stat-label">Upload Average Proof (Required)</span>
             <input type="file" id="j_screenshot" accept="image/*" multiple>
             <button id="joinSubmitBtn" class="main-submit" onclick="handleSend('JOIN')">
                <div id="join-spinner" class="spinner"></div>
                <span>SEND APPLICATION</span>
-           </button>
+            </button>
             
             <hr style="margin: 30px 0; border: 0; border-top: 1px solid #444;">
             <h2>🔍 Check Application Status</h2>
@@ -200,8 +212,9 @@
 </div>
 
 <script>
+    // UPDATE THIS URL WITH YOUR DEPLOYED APPS SCRIPT URL
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
-    
+
     window.onload = () => {
         setTimeout(() => { document.getElementById('pwa-toast').style.display = 'block'; }, 2000);
     };
@@ -220,7 +233,6 @@
        document.getElementById(leagueId + '-fixtures').classList.remove('sub-active'); 
        const container = document.getElementById(leagueId + '-' + viewType);
        container.classList.add('sub-active'); 
-       
        container.innerHTML = "<div style='text-align:center; padding:20px;'>Loading " + viewType + "...</div>";
        
        const action = viewType === 'table' ? 'getStandings' : 'getLeagueData';
@@ -228,25 +240,28 @@
 
        try {
            const res = await fetch(`${scriptURL}?action=${action}&league=${encodeURIComponent(leagueNames[leagueId])}`);
-           if (!res.ok) throw new Error('Network error');
-           const fullData = await res.json();
+           const data = await res.json();
            
-           const data = fullData.filter(row => row && row[0] && row[0].toString().trim() !== "");
-
            if(!data || data.length < 1) {
                container.innerHTML = "<p style='text-align:center;'>No data found.</p>";
                return;
            }
 
            let html = '<table><thead><tr>';
-           const colLimit = viewType === 'table' ? 8 : 7;
+           // If it's a table, show 8 columns (Pos to Pts). If fixtures, show 7 (Week to Deadline).
+           const colLimit = (viewType === 'table') ? 8 : 7;
+           
+           // Render Headers
            data[0].slice(0, colLimit).forEach(h => html += `<th>${h}</th>`);
            html += '</tr></thead><tbody>';
 
+           // Render Rows
            data.slice(1).forEach(row => {
+               if(!row[0]) return; // Skip empty rows
                html += '<tr>';
                for(let i=0; i < colLimit; i++) {
                    let cell = row[i] !== undefined ? row[i] : "";
+                   // Show PENDING if score columns (4 and 5) are empty in fixtures
                    if(viewType === 'fixtures' && i === 4 && (!row[4] && !row[5])) {
                        cell = "<span class='status-pending'>PENDING</span>";
                    }
@@ -257,7 +272,7 @@
            html += '</tbody></table>';
            container.innerHTML = html;
        } catch (e) { 
-           container.innerHTML = "<div style='color:var(--red); padding:20px;'>Error: " + e.message + ". Check Google Script for 'getStandings' action.</div>"; 
+           container.innerHTML = "<div style='color:var(--red); padding:20px;'>Error: " + e.message + "</div>"; 
        }
     }
     
@@ -268,8 +283,8 @@
         try {
             const r = await fetch(`${scriptURL}?action=checkStatus&name=${encodeURIComponent(n)}&pin=${p}`);
             const d = await r.json();
-            resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
-        } catch (e) { resDiv.innerHTML = "Error."; }
+            resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Application not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
+        } catch (e) { resDiv.innerHTML = "Error checking status."; }
     }
 
     async function fetchOpponents() {
@@ -278,15 +293,14 @@
         try { 
             const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`); 
             let data = await res.json(); 
-            const filteredData = data.filter(o => o && o.toString().trim() !== "" && o !== "-");
             const sel = document.getElementById('p2'); 
             sel.innerHTML = '<option value="">-- Select Opponent --</option>'; 
-            filteredData.forEach(o => { 
+            data.filter(o => o && o !== "-").forEach(o => { 
                 let opt = document.createElement('option'); 
                 opt.value = opt.innerHTML = o; 
                 sel.appendChild(opt); 
             }); 
-            if (filteredData.length === 0) alert("No pending fixtures found for this PIN.");
+            if (data.length === 0) alert("No pending fixtures found for this PIN.");
         } catch (e) { alert("Error loading fixtures."); }
     }
 
@@ -297,9 +311,9 @@
         const spinner = isM ? document.getElementById('match-spinner') : document.getElementById('join-spinner');
         
         if (isM) {
-            if (!document.getElementById('p1').value || !document.getElementById('pin').value || !document.getElementById('p2').value || document.getElementById('s1').value === "" || fileInput.files.length === 0) return alert("⚠️ Please complete all fields.");
+            if (!document.getElementById('p1').value || !document.getElementById('pin').value || !document.getElementById('p2').value || document.getElementById('s1').value === "" || fileInput.files.length === 0) return alert("⚠️ Please complete all required fields and attach proof.");
         } else {
-            if (!document.getElementById('j_name').value || !document.getElementById('j_pin').value || !document.getElementById('j_league').value || !document.getElementById('j_email').value || fileInput.files.length === 0) return alert("⚠️ All application fields mandatory.");
+            if (!document.getElementById('j_name').value || !document.getElementById('j_pin').value || !document.getElementById('j_league').value || !document.getElementById('j_email').value || fileInput.files.length === 0) return alert("⚠️ All application fields are mandatory.");
         }
 
         btn.disabled = true; spinner.style.display = "block";
@@ -323,9 +337,9 @@
         try {
             for (let f of fileInput.files) { const b64 = await toBase64(f); data.images.push(b64.split(',')[1]); }
             const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
-            alert("Success!");
+            alert("Success! Your submission has been received.");
             location.reload();
-        } catch (err) { alert("Error sending."); btn.disabled = false; spinner.style.display = "none"; btn.querySelector('span').innerText = originalText; }
+        } catch (err) { alert("Error sending. Please try again."); btn.disabled = false; spinner.style.display = "none"; btn.querySelector('span').innerText = originalText; }
     }
 
     const toBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = e => rej(e); });
