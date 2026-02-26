@@ -6,7 +6,7 @@
     <title>The Checkout Club</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Baskervville&display=swap" rel="stylesheet">
     <style>
-        :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; --accent: #45a29e; }
+        :root { --red: #e63946; --gold: #ffcc00; --dark: #0b0c10; --card: #1f2833; --text: #c5c6c7; --accent: #45a29e; --header-bg: #2c3e50; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; overflow-x: hidden; }
         
         .header-brand h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--gold); margin-top: 15px; letter-spacing: 2px; text-transform: uppercase; text-shadow: 3px 3px 0px rgba(0,0,0,0.8); }
@@ -38,9 +38,15 @@
         
         .table-scroll { overflow-x: auto; width: 100%; border-radius: 8px; margin-top: 10px; }
         table { width: 100%; border-collapse: collapse; background: #121212; color: white; font-size: 13px; }
-        th { background: var(--red); color: white; padding: 12px 8px; text-align: left; white-space: nowrap; }
+        
+        /* Updated Headers: No more Red */
+        th { background: var(--header-bg); color: var(--gold); padding: 12px 8px; text-align: left; white-space: nowrap; border-bottom: 2px solid var(--accent); text-transform: uppercase; font-size: 11px; }
         td { border-bottom: 1px solid #333; padding: 12px 8px; white-space: nowrap; }
         
+        /* Conditional Row Colors */
+        .row-promote { background-color: rgba(40, 167, 69, 0.2) !important; border-left: 4px solid #28a745; }
+        .row-relegate { background-color: rgba(220, 53, 69, 0.2) !important; border-left: 4px solid #dc3545; }
+
         .status-pending { color: var(--gold); font-weight: bold; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
         
@@ -212,7 +218,6 @@
 </div>
 
 <script>
-    // UPDATE THIS URL WITH YOUR DEPLOYED APPS SCRIPT URL
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
 
     window.onload = () => {
@@ -248,20 +253,28 @@
            }
 
            let html = '<table><thead><tr>';
-           // If it's a table, show 8 columns (Pos to Pts). If fixtures, show 7 (Week to Deadline).
            const colLimit = (viewType === 'table') ? 8 : 7;
            
-           // Render Headers
+           // Render Headers (CSS handles the Slate Blue color)
            data[0].slice(0, colLimit).forEach(h => html += `<th>${h}</th>`);
            html += '</tr></thead><tbody>';
 
+           const rows = data.slice(1).filter(r => r[0] !== "");
+           const totalRows = rows.length;
+
            // Render Rows
-           data.slice(1).forEach(row => {
-               if(!row[0]) return; // Skip empty rows
-               html += '<tr>';
+           rows.forEach((row, index) => {
+               let rowClass = "";
+               
+               // Conditional Formatting Logic for Standings Table only
+               if (viewType === 'table') {
+                   if (index < 2) rowClass = "row-promote"; // Top 2
+                   else if (index >= totalRows - 2 && totalRows > 4) rowClass = "row-relegate"; // Bottom 2
+               }
+
+               html += `<tr class="${rowClass}">`;
                for(let i=0; i < colLimit; i++) {
                    let cell = row[i] !== undefined ? row[i] : "";
-                   // Show PENDING if score columns (4 and 5) are empty in fixtures
                    if(viewType === 'fixtures' && i === 4 && (!row[4] && !row[5])) {
                        cell = "<span class='status-pending'>PENDING</span>";
                    }
