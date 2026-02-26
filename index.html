@@ -230,7 +230,23 @@
     async function fetchOpponents() {
         const p1 = document.getElementById('p1').value, pin = document.getElementById('pin').value;
         if(!p1 || !pin) return alert("Enter Name and PIN");
-        try { const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`); const data = await res.json(); const sel = document.getElementById('p2'); sel.innerHTML = '<option value="">-- Select Opponent --</option>'; data.forEach(o => { let opt = document.createElement('option'); opt.value = opt.innerHTML = o; sel.appendChild(opt); }); } catch (e) { alert("Error loading fixtures."); }
+        try { 
+            const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`); 
+            let data = await res.json(); 
+            
+            // FILTER LOGIC: Remove empty red rows/placeholders
+            const filteredData = data.filter(o => o && o.toString().trim() !== "" && o !== "-");
+
+            const sel = document.getElementById('p2'); 
+            sel.innerHTML = '<option value="">-- Select Opponent --</option>'; 
+            filteredData.forEach(o => { 
+                let opt = document.createElement('option'); 
+                opt.value = opt.innerHTML = o; 
+                sel.appendChild(opt); 
+            }); 
+            
+            if (filteredData.length === 0) alert("No pending fixtures found for this PIN.");
+        } catch (e) { alert("Error loading fixtures."); }
     }
 
     async function handleSend(mode) {
@@ -256,7 +272,7 @@
             player1: document.getElementById(isM ? 'p1' : 'j_name').value, 
             pin: document.getElementById(isM ? 'pin' : 'j_pin').value, 
             email: isM ? null : document.getElementById('j_email').value,
-           requested_league: !isM ? document.getElementById('j_league').value : null, 
+            requested_league: !isM ? document.getElementById('j_league').value : null, 
             score1: isM ? document.getElementById('s1').value : null, 
             score2: isM ? document.getElementById('s2').value : null, 
             player2: isM ? document.getElementById('p2').value : null, 
@@ -271,20 +287,19 @@
             const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             const resultText = await response.text();
 
-            // STOP SPINNER & RESET BUTTON IMMEDIATELY AFTER RESPONSE
             btn.disabled = false;
             spinner.style.display = "none";
             btn.querySelector('span').innerText = originalText;
 
             if (resultText === "DUPLICATE_APPLICATION") {
-                alert("⚠️ It looks like you have already submitted an application. Please wait for an admin to review it and check your Junk folder.");
+                alert("⚠️ It looks like you have already submitted an application. Please wait for an admin to review it.");
             } else if (resultText === "ALREADY_MEMBER") {
                 alert("⚠️ You are already a registered member of The Checkout Club!");
             } else if (isM) { 
                 alert("Match Result Submitted Successfully!"); 
                 location.reload();
             } else { 
-                alert("Application Sent!\n\nPlease check your email for confirmation. Once reviewed, you will receive a Welcome Email with your next steps.\n\nIMPORTANT: Please check your Junk/Spam folder as it may be delivered there."); 
+                alert("Application Sent!\n\nPlease check your email for confirmation."); 
                 location.reload();
             }
 
