@@ -27,7 +27,14 @@
         .view-controls { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
         .view-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; flex: 1; max-width: 150px; text-align: center; }
         .view-btn:hover { background: var(--accent); }
-        iframe { width: 100%; height: 600px; border: none; background: white; border-radius: 10px; }
+        
+        /* NEW TABLE STYLE FOR DATA FEED */
+        .table-scroll { overflow-x: auto; width: 100%; border-radius: 8px; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; background: #121212; color: white; font-size: 13px; }
+        th { background: var(--red); color: white; padding: 12px 8px; text-align: left; white-space: nowrap; }
+        td { border-bottom: 1px solid #333; padding: 12px 8px; white-space: nowrap; }
+        .status-pending { color: var(--gold); font-weight: bold; }
+
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid var(--accent); background: var(--dark); color: white; box-sizing: border-box; font-size: 16px; }
         .stat-label { font-size: 12px; color: var(--gold); margin-top: 10px; display: block; font-weight: bold; }
         button.main-submit { background: var(--red); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; }
@@ -132,10 +139,10 @@
         </div>
     </div>
 
-    <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=52113112&single=true&widget=false&chrome=false"></iframe></div><div id="PL-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=264028874&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=927779901&single=true&widget=false&chrome=false"></iframe></div><div id="CH-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=322317735&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1552907493&single=true&widget=false&chrome=false"></iframe></div><div id="L1-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1711963282&single=true&widget=false&chrome=false"></iframe></div></div></div>
-    <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=1921113891&single=true&widget=false&chrome=false"></iframe></div><div id="L2-fixtures" class="sub-view"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2x-rU4QGT_NTOvPbKaEERcmsKONT8Y0KemvtkkorIncWaLD_HBSey-k-D3qLDWBD_VzHCrhx3oCYS/pubhtml?gid=134304779&single=true&widget=false&chrome=false"></iframe></div></div></div>
+    <div id="PL" class="league-section"><div class="card"><h2>🏆 Premiership</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('PL', 'table')">Table</button><button class="view-btn" onclick="toggleView('PL', 'fixtures')">Fixtures</button></div><div id="PL-table" class="sub-view sub-active table-scroll">Loading...</div><div id="PL-fixtures" class="sub-view table-scroll">Loading...</div></div></div>
+    <div id="CH" class="league-section"><div class="card"><h2>🥈 Championship</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('CH', 'table')">Table</button><button class="view-btn" onclick="toggleView('CH', 'fixtures')">Fixtures</button></div><div id="CH-table" class="sub-view sub-active table-scroll">Loading...</div><div id="CH-fixtures" class="sub-view table-scroll">Loading...</div></div></div>
+    <div id="L1" class="league-section"><div class="card"><h2>🎯 League 1</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L1', 'table')">Table</button><button class="view-btn" onclick="toggleView('L1', 'fixtures')">Fixtures</button></div><div id="L1-table" class="sub-view sub-active table-scroll">Loading...</div><div id="L1-fixtures" class="sub-view table-scroll">Loading...</div></div></div>
+    <div id="L2" class="league-section"><div class="card"><h2>🎯 League 2</h2><div class="view-controls"><button class="view-btn" onclick="toggleView('L2', 'table')">Table</button><button class="view-btn" onclick="toggleView('L2', 'fixtures')">Fixtures</button></div><div id="L2-table" class="sub-view sub-active table-scroll">Loading...</div><div id="L2-fixtures" class="sub-view table-scroll">Loading...</div></div></div>
 
     <div id="SUBMIT" class="league-section">
         <div class="card">
@@ -205,25 +212,57 @@
        document.querySelectorAll('.league-section').forEach(s => s.classList.remove('active')); 
         const target = document.getElementById(id);
        target.classList.add('active'); 
-        const firstTable = target.querySelector('.sub-view');
-        if(firstTable) toggleView(id, 'table');
+       if(['PL','CH','L1','L2'].includes(id)) toggleView(id, 'table');
        window.scrollTo(0, 0); 
     }
 
-    function toggleView(leagueId, viewType) { 
+    async function toggleView(leagueId, viewType) { 
        document.getElementById(leagueId + '-table').classList.remove('sub-active'); 
        document.getElementById(leagueId + '-fixtures').classList.remove('sub-active'); 
-       document.getElementById(leagueId + '-' + viewType).classList.add('sub-active'); 
+       const container = document.getElementById(leagueId + '-' + viewType);
+       container.classList.add('sub-active'); 
+       
+       container.innerHTML = "<div style='text-align:center; padding:20px;'>Loading " + viewType + "...</div>";
+       
+       const action = viewType === 'table' ? 'getStandings' : 'getLeagueData';
+       const leagueNames = {'PL':'Premiership', 'CH':'Championship', 'L1':'League 1', 'L2':'League 2'};
+
+       try {
+           const res = await fetch(`${scriptURL}?action=${action}&league=${encodeURIComponent(leagueNames[leagueId])}`);
+           const fullData = await res.json();
+           const data = fullData.filter(row => row[0] && row[0].toString().trim() !== "");
+
+           if(data.length < 1) {
+               container.innerHTML = "<p style='text-align:center;'>No fixtures yet.</p>";
+               return;
+           }
+
+           let html = '<table><thead><tr>';
+           data[0].slice(0, viewType === 'fixtures' ? 7 : 8).forEach(h => html += `<th>${h}</th>`);
+           html += '</tr></thead><tbody>';
+
+           data.slice(1).forEach(row => {
+               html += '<tr>';
+               row.slice(0, viewType === 'fixtures' ? 7 : 8).forEach((cell, idx) => {
+                   let displayValue = cell;
+                   if(viewType === 'fixtures' && idx === 4 && row[4] === "" && row[5] === "") displayValue = "<span class='status-pending'>PENDING</span>";
+                   html += `<td>${displayValue}</td>`;
+               });
+               html += '</tr>';
+           });
+           html += '</tbody></table>';
+           container.innerHTML = html;
+       } catch (e) { container.innerHTML = "Error loading data."; }
     }
     
     async function checkStatus() {
         const n = document.getElementById('c_name').value, p = document.getElementById('c_pin').value, resDiv = document.getElementById('statusResult');
         if(!n || !p) return alert("Enter Name and PIN");
-       resDiv.style.display = "block"; resDiv.innerHTML = "Searching...";
+        resDiv.style.display = "block"; resDiv.innerHTML = "Searching...";
         try {
             const r = await fetch(`${scriptURL}?action=checkStatus&name=${encodeURIComponent(n)}&pin=${p}`);
             const d = await r.json();
-           resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
+            resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
         } catch (e) { resDiv.innerHTML = "Error."; }
     }
 
@@ -233,10 +272,7 @@
         try { 
             const res = await fetch(`${scriptURL}?action=getFixtures&name=${encodeURIComponent(p1)}&pin=${pin}`); 
             let data = await res.json(); 
-            
-            // FILTER LOGIC: Remove empty red rows/placeholders
             const filteredData = data.filter(o => o && o.toString().trim() !== "" && o !== "-");
-
             const sel = document.getElementById('p2'); 
             sel.innerHTML = '<option value="">-- Select Opponent --</option>'; 
             filteredData.forEach(o => { 
@@ -244,7 +280,6 @@
                 opt.value = opt.innerHTML = o; 
                 sel.appendChild(opt); 
             }); 
-            
             if (filteredData.length === 0) alert("No pending fixtures found for this PIN.");
         } catch (e) { alert("Error loading fixtures."); }
     }
@@ -258,14 +293,12 @@
         if (isM) {
             if (!document.getElementById('p1').value || !document.getElementById('pin').value || !document.getElementById('p2').value || document.getElementById('s1').value === "" || fileInput.files.length === 0) return alert("⚠️ Please complete all fields.");
         } else {
-            if (!document.getElementById('j_name').value || !document.getElementById('j_pin').value || !document.getElementById('j_league').value || !document.getElementById('j_email').value || fileInput.files.length === 0) {
-                return alert("⚠️ All application fields including Email and Average Proof are mandatory.");
-            }
+            if (!document.getElementById('j_name').value || !document.getElementById('j_pin').value || !document.getElementById('j_league').value || !document.getElementById('j_email').value || fileInput.files.length === 0) return alert("⚠️ All application fields mandatory.");
         }
 
         btn.disabled = true; spinner.style.display = "block";
         const originalText = btn.querySelector('span').innerText;
-       btn.querySelector('span').innerText = "SENDING...";
+        btn.querySelector('span').innerText = "SENDING...";
 
         const data = {
             type: isM ? "MATCH" : "JOIN_REQUEST", 
@@ -283,32 +316,10 @@
 
         try {
             for (let f of fileInput.files) { const b64 = await toBase64(f); data.images.push(b64.split(',')[1]); }
-            
             const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
-            const resultText = await response.text();
-
-            btn.disabled = false;
-            spinner.style.display = "none";
-            btn.querySelector('span').innerText = originalText;
-
-            if (resultText === "DUPLICATE_APPLICATION") {
-                alert("⚠️ It looks like you have already submitted an application. Please wait for an admin to review it.");
-            } else if (resultText === "ALREADY_MEMBER") {
-                alert("⚠️ You are already a registered member of The Checkout Club!");
-            } else if (isM) { 
-                alert("Match Result Submitted Successfully!"); 
-                location.reload();
-            } else { 
-                alert("Application Sent!\n\nPlease check your email for confirmation."); 
-                location.reload();
-            }
-
-        } catch (err) { 
-            alert("Error sending. Check connection."); 
-            btn.disabled = false;
-            spinner.style.display = "none"; 
-            btn.querySelector('span').innerText = originalText; 
-        }
+            alert("Success!");
+            location.reload();
+        } catch (err) { alert("Error sending."); btn.disabled = false; spinner.style.display = "none"; btn.querySelector('span').innerText = originalText; }
     }
 
     const toBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.readAsDataURL(f); r.onload = () => res(r.result); r.onerror = e => rej(e); });
