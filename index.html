@@ -216,7 +216,8 @@
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyBkBjQjXcYtaQ2QckliasZtaKVgjahKRDIWtsgDdr7-RKbMKG8z96tjaHZPdbc_oAf/exec';
+    // UPDATED APPS SCRIPT URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw_jUTxjwVV_wvQf0snSj7bv5L4DmHxlBq5ONWnP20IHH7Ynusnww_ba2K_CJjC8wsK/exec';
 
     window.onload = () => {
         setTimeout(() => { document.getElementById('pwa-toast').style.display = 'block'; }, 2000);
@@ -284,14 +285,14 @@
     }
     
     async function checkStatus() {
-        const n = document.getElementById('c_name').value, p = document.getElementById('c_pin').value, resDiv = document.getElementById('statusResult');
-        if(!n || !p) return alert("Enter Name and PIN");
-        resDiv.style.display = "block"; resDiv.innerHTML = "Searching...";
-        try {
-            const r = await fetch(`${scriptURL}?action=checkStatus&name=${encodeURIComponent(n)}&pin=${p}`);
-            const d = await r.json();
-            resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Application not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
-        } catch (e) { resDiv.innerHTML = "Error checking status."; }
+         const n = document.getElementById('c_name').value, p = document.getElementById('c_pin').value, resDiv = document.getElementById('statusResult');
+         if(!n || !p) return alert("Enter Name and PIN");
+         resDiv.style.display = "block"; resDiv.innerHTML = "Searching...";
+         try {
+             const r = await fetch(`${scriptURL}?action=checkStatus&name=${encodeURIComponent(n)}&pin=${p}`);
+             const d = await r.json();
+             resDiv.innerHTML = d.status === "NOT_FOUND" ? "❌ Application not found." : `STATUS: ${d.status}<br>LEAGUE: ${d.league}`;
+         } catch (e) { resDiv.innerHTML = "Error checking status."; }
     }
 
     async function fetchOpponents() {
@@ -345,7 +346,7 @@
             for (let f of fileInput.files) { const b64 = await toBase64(f); data.images.push(b64.split(',')[1]); }
             
             const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
-            const resultText = await response.text(); // FIX: Properly read result as text
+            const resultText = await response.text(); 
 
             // Handle logic for the "Check Junk" Popup
             if (resultText.trim() === "SUCCESS_MAIL_CHECK") {
